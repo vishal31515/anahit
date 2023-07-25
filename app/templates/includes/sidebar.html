@@ -1,0 +1,89 @@
+{% load static %}
+
+<div class="left-sidebar fixed-left">
+    <div class="toggle">
+        <a class="not-show collapsed" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample1"><img
+                src="{% static 'img/images/icon-burger-menu.png' %}" alt="" class="hide-after"> <i
+                class="fa fa-times hide-before" aria-hidden="true"></i></a>
+    </div>
+    <ul class="social-sidebar append-icon">
+        <li>
+            {% if request.session.light_mode == False %}
+            <a href="javascript:void(0)" class="dark-toggle light">
+            <i class="fas fa-sun light_icon change_theme"></i><i class="fas fa-moon text-grey dark_icon change_theme"></i></a>
+            {% else %}
+            <a href="javascript:void(0)" class="dark-toggle">
+            <i class="fas fa-moon text-grey dark_icon change_theme"></i><i class="fas fa-sun light_icon change_theme"></i></a>
+            {% endif %}
+        </li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Linkedin</a></li>
+        <li class="rotate-90 mt-60"><img src="{% static 'img/images/title-Line.png' %}" alt=""></li>
+    </ul>
+</div>
+
+<div class="sidebar_wrapper">
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="card card-body custom-toggle">
+                    <div class="toggle">
+                        <a class="not-show collapsed" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+                            aria-expanded="false" aria-controls="multiCollapseExample1"><i
+                                class="fa fa-times hide-before" aria-hidden="true"></i></a>
+                    </div>
+                    <ul class="toggle-menu">
+                        <li class="active"><a href="{% url 'about_us' %}">About</a></li>                       
+                        <li><a href="{% url 'blog_home' %}">Blog</a></li>
+                        <li><a href="{% url 'contact_us' %}">Contact</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'finsight' %}">Dashboard</a></li>
+                        <li><a href="{% url 'real-time-alerts' %}">Real-Time Alerts</a></li>
+                        <li><a href="{% url 'my_account' %}">My Account</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'price' %}">Prices</a></li>
+                        <li><a href="{% url 'services' %}">Services</a></li>
+                    </ul>
+                    <!-- <div class="input-group">
+                        <div class="form-outline">
+                            <input id="search-input" type="search" id="form1" class="form-control"
+                                placeholder="Search" />
+                        </div>
+                        <button id="search-button" type="button" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div> -->
+
+                    <ul class="login-reg">
+                        {% if user.is_authenticated  %}
+                        <li>
+                            <!-- <a href="{% url 'account_logout' %}">Logout</a> -->
+                            <form action ="{% url 'account_logout' %}" method ="post">
+                                {% csrf_token %}
+                                <button type="submit" class="py-1 post_comment_btn">Logout</button>
+                            </form>
+                        </li>
+                        {% else %}
+                        <li><a href="{% url 'account_login' %}">Login</a></li>
+                        <li><a href="#"><span class="dot-bg">.</span></a></li>
+                        <li><a href="{% url 'account_signup' %}">Register</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <!-- <div class="accept-cookies">
+                        <div class="space-top">
+                            <h3>Accept Cookies</h3>
+                            <p>This website uses cookies. By continuing to use this website you are giving consent to
+                                cookies being used. More information</p>
+                            <ul>
+                                <li><a href="#" class="active-border">Accept</a></li>
+                                <li><a href="#">Settings</a></li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

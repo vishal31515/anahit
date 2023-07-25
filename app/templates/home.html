@@ -1,0 +1,615 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+
+  <div class="right-bar">
+    <!-- ======= Header ======= -->
+    {% include 'includes/header.html' %}
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero align-items-center count_section">
+      <div class="container-fluid">
+        <div class="hero_slider">
+          <div class="">
+            <div class="hero_slide">
+              <div class="row me-0">
+                <div class="col-xl-5 col-lg-7 flex-column justify-content-center z-index left-col-space">
+                  <h5><img class="d-inline-block" src="{% static 'img/images/title-Line.png' %}"> Navigate changing
+                    markets with</h5>
+                  <h1 data-aos="fade-up">Investment<br> Insights<span class="dot-bg">.</span></h1>
+                  <p>Spot investment opportunities on the go <br>with data-driven insights and real-time alerts.</p>
+                  <div data-aos="fade-up" data-aos-delay="600">
+
+                    <ul class="top-btn d-md-flex align-items-center">
+                      {% if not request.user.is_authenticated %}
+                      <li class="d-block d-sm-inline-block mb-sm-0 mb-3">
+                        <a href="{% url 'account_signup' %}"
+                          class="btn-get-started scrollto  align-items-center justify-content-center align-self-center sign_me_btn">
+                          <span>SIGN ME UP</span>
+                        </a>
+                      </li>
+                      {% endif %}
+                      <li class="align-text-bottom play_btn_item"><a data-bs-target="#video_popup"
+                          data-bs-toggle="modal" class="d-inline-block align-middle video_playbtn"><img
+                            src="{% static 'img/images/play_button.png' %}" class="img-fluid ply-btn" alt=""></a>
+
+                        <!---<span class="round-bg"><i class="fa fa-play" aria-hidden="true"></i></span>--->
+                      </li>
+                      <li class="ab-top">
+                        <p class="about_promote my-0">ABOUT US <br><span class="promotion_text">Promotion video</span>
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="hero_slide">
+              <div class="row me-0">
+                <div class="col-xl-5 col-lg-7 flex-column justify-content-center z-index left-col-space">
+                  <h5><img class="d-inline-block" src="{% static 'img/images/title-Line.png' %}"> Navigate changing
+                    markets with</h5>
+                  <h1 data-aos="fade-up">Investment<br> Insights<span class="dot-bg">.</span></h1>
+                  <p>Spot investment opportunities on the go <br>with data-driven insights and real-time alerts.</p>
+                  <div data-aos="fade-up" data-aos-delay="600">
+                    <ul class="top-btn d-md-flex align-items-center">
+                      {% if not request.user.is_authenticated %}
+                      <li class="d-block d-sm-inline-block mb-sm-0 mb-3">
+                        <a href="{% url 'account_signup' %}"
+                          class="btn-get-started scrollto  align-items-center justify-content-center align-self-center sign_me_btn">
+                          <span>SIGN ME UP</span>
+                        </a>
+                      </li>
+                      {% endif %}
+                      <li class="align-text-bottom play_btn_item"><a data-bs-target="#video_popup"
+                          data-bs-toggle="modal" class="video_playbtn"> <img src="{% static 'img/images/play_button.png' %}"
+                            class=" img-fluid ply-btn" alt=""></a>
+                        <!---<span class="round-bg"><i class="fa fa-play" aria-hidden="true"></i></span>--->
+                      </li>
+                      <li class="ab-top">
+                        <p class="about_promote my-0">ABOUT US <br><span class="promotion_text">Promotion video</span>
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="hero_slide">
+              <div class="row me-0">
+                <div class="col-xl-5 col-lg-7 flex-column justify-content-center z-index left-col-space">
+                  <h5><img class="d-inline-block" src="{% static 'img/images/title-Line.png' %}"> Navigate changing
+                    markets with</h5>
+                  <h1 data-aos="fade-up">Investment<br> Insights<span class="dot-bg">.</span></h1>
+                  <p>Spot investment opportunities on the go <br>with data-driven insights and real-time alerts.</p>
+                  <div data-aos="fade-up" data-aos-delay="600">
+                    <ul class="top-btn d-md-flex align-items-center">
+                      {% if not request.user.is_authenticated %}
+                      <li class="d-block d-sm-inline-block mb-sm-0 mb-3">
+                        <a href="{% url 'account_signup' %}"
+                          class="btn-get-started scrollto  align-items-center justify-content-center align-self-center sign_me_btn">
+                          <span>SIGN ME UP</span>
+                        </a>
+                      </li>
+                      {% endif %}
+                      <li class="align-text-bottom play_btn_item"><a data-bs-target="#video_popup"
+                          data-bs-toggle="modal" class="video_playbtn"> <img src="{% static 'img/images/play_button.png' %}"
+                            class=" img-fluid ply-btn" alt=""></a>
+                        <!---<span class="round-bg"><i class="fa fa-play" aria-hidden="true"></i></span>--->
+                      </li>
+                      <li class="ab-top">
+                        <p class="about_promote my-0">ABOUT US <br><span class="promotion_text">Promotion video</span>
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Hero -->
+
+    <main id="main">
+      <!-- ======= About Section ======= -->
+      <section id="about" class="about count_section">
+
+        <div class="container" data-aos="fade-up">
+          <div class="row gx-0">
+            <div class="col-lg-12  flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <div class="in-sight">
+                <h5><img src="{% static 'img/images/title-Line.png' %}"> Analyse investment opportunities with</h5>
+                <h3>Insights and real-time alerts<span class="dot-bg">.</span></h3>
+                <div class="ins">
+                  <div class="c1"></div>
+                  <div class="c2"></div>
+                  <div class="c3"></div>
+                  <div class="c4"></div>
+                  <div class="c5"></div>
+                  <div class="c6"></div>
+                  <div class="c7"></div>
+                  <div class="c8"></div>
+                </div>
+                <p>Simplify investment decisions with free access to expert insights and alerts on equity <br>markets,
+                  cryptocurrencies, and other asset classes.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section><!-- End About Section -->
+
+
+      <section class="about2">
+
+        <div class="container" data-aos="fade-up">
+          <div class="row gx-0">
+
+            <div class="row">
+              <div class="col-lg-6 flex-column justify-content-center text-center" data-aos="fade-up"
+                data-aos-delay="200">
+                <div class="t-icons first h-100">
+                  <div class="fins-bg">
+                    <img src="{% static 'img/images/Vector.png' %}" class="light_mode_hide">
+                    <img src="{% static 'img/images/finsights_dark.png' %}" class="light_mode_show">
+                  </div>
+                  <h4>Finsights</h4>
+                  <p>Find the best investment opportunities across different asset classes with interactive dashboards
+                    delivered to your inbox for free.</p>
+                  <div class="line_bottom">
+                    <a href="#" class="stroke_btn">Subscribe</a>
+                    <hr class="hr_bg centered_stroke" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 flex-column justify-content-center text-center" data-aos="fade-up"
+                data-aos-delay="200">
+                <div class="t-icons first h-100">
+                  <div class="fins-bg">
+                    <img src="{% static 'img/images/global.png' %}" class="light_mode_hide">
+                    <img src="{% static 'img/images/finalerts_dark.png' %}" class="light_mode_show">
+                  </div>
+                  <h4>Finalerts</h4>
+                  <p>Receive real-time asset buy and sell recommendations based on risk preferences and investment
+                    goals, all done for you by proprietary algorithms.</p>
+                  <div class="line_bottom">
+                    <a href="#" class="stroke_btn">Subscribe</a>
+                    <hr class="hr_bg centered_stroke" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section><!-- End About Section -->
+
+
+      <!-- ======= Values Section ======= -->
+      <section class="build count_section">
+
+        <div class="container-fluid px-md-3 px-0" data-aos="fade-up">
+
+          <div class="row">
+
+            <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <div class="build-box">
+                <h5><img src="{% static 'img/images/title-Line.png' %}"> Investment success comes when you</h5>
+                <h3>Build, preserve, & <br> manage wealth<span class="dot-bg">.</span></h3>
+                <p>Investors often fail to build financial wealth as they chase hot tips. They often forget that
+                  knowledge is the most valuable asset. That’s why we have come up with a one-of-its-kind AI-powered and
+                  algorithm-driven platform to help you make smarter and informed decisions. Find diverse investment
+                  opportunities tailored to your personal investing goals and needs, and leverage
+                  tried-and-true-principle-driven portfolio knowledge from specialists with years of experience. </p>
+                <h6><a href="{%url 'price' %}">Subscribe to finsights</a></h6>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mt-0 mt-lg-0 flex-column justify-content-center" data-aos="fade-up"
+              data-aos-delay="400">
+              <div class="box">
+                <img src="{% static 'img/images/build.png' %}" class="img-fluid grayscale w-100" alt="">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section><!-- End Values Section -->
+
+
+      <section class="why-choose count_section">
+        <div class="container" data-aos="fade-up">
+
+          <div class="row gy-4">
+
+            <div class="col-lg-2 text-center mobile_hide pt-4">
+              <div class="choose-box">
+                <div class="bg-b">
+                  <img src="{% static 'img/images/economics_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{% static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p class="mb-0 mt-4">Macro Analysis</p>
+                </div>
+              </div>
+              <div class="choose-box">
+                <div class="bg-b alter_top">
+                  <img src="{% static 'img/images/stock_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{% static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p class="mb-0 mt-4">Fundamental Analysis</p>
+                </div>
+              </div>
+              <div class="choose-box">
+                <div class="bg-b alter_top">
+                  <img src="{%static 'img/images/analysis_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{%static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p class="mb-0 mt-4">Technical Analysis</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-2 text-center why-2">
+
+              <div class="ins why">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+                <div class="c4"></div>
+                <div class="c5"></div>
+                <div class="c6"></div>
+                <div class="c7"></div>
+              </div>
+
+              <div class="choose-box mobile_hide">
+                <div class="bg-b">
+                  <img src="{%static 'img/images/social-media_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{%static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p class="mb-0 mt-4">Social Sentiment Analysis</p>
+                </div>
+              </div>
+              <div class="choose-box mobile_hide">
+                <div class="bg-b alter_top">
+                  <img src="{%static 'img/images/searching_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{%static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p class="mb-0 mt-4">News Analysis</p>
+                </div>
+              </div>
+            </div>
+            <div class="why_choose_slider">
+              <div class="choose-box">
+                <div class="bg-b">
+                  <img src="{% static 'img/images/economics_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{% static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p class="mb-0">Macro Analysis</p>
+                </div>
+              </div>
+              <div class="choose-box">
+                <div class="bg-b alter_top">
+                  <img src="{% static 'img/images/stock_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{% static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p>Fundamental Analysis</p>
+                </div>
+              </div>
+              <div class="choose-box">
+                <div class="bg-b alter_top">
+                  <img src="{%static 'img/images/analysis_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{%static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p>Technical Analysis</p>
+                </div>
+              </div>
+              <div class="choose-box">
+                <div class="bg-b">
+                  <img src="{%static 'img/images/social-media_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{%static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p>Social Sentiment Analysis</p>
+                </div>
+              </div>
+              <div class="choose-box">
+                <div class="bg-b alter_top">
+                  <img src="{%static 'img/images/searching_icon.png' %}" class="img-fluid" alt="">
+                  <img src="{%static 'img/images/plus.png' %}" class="plus-icon" alt="">
+                  <p>News Analysis</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-1"></div>
+            <div class="col-lg-7">
+              <div class="why-right">
+                <h5><img src="{%static 'img/images/title-Line.png' %}"> Why Anahit</h5>
+                <h2 class="primary_head">Why choose us<span class="dot-bg">.</span></h2>
+                <p>Discover timely predictions and make the right investment with data-driven financial insights from
+                  Anahit, a platform that leverages the combination of machine learning and artificial intelligence.</p>
+                <h4><img src="{%static 'img/images/true.png' %}"> AI-powered investing insights</h4>
+                <p class="p-left">Augment investment decisions with strategic insights delivered after analysing social
+                  sentiment, news, market trends, economic changes, and fair market value.</p>
+                <h4><img src="{%static 'img/images/true.png' %}"> The power of five</h4>
+                <p class="p-left">Insights available on Anahit is the result of proprietary algorithms that leverage
+                  macro analysis, technical analysis, fundamental analysis, social sentiment analysis, and news
+                  analysis. </p>
+                <div class="mt-4"><a href="#">Learn more</a></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section><!-- End Counts Section -->
+
+
+      <!-- ======= Testimonials Section ======= -->
+      <section class="good-company testimonials count_section">
+
+        <div class="container" data-aos="fade-up">
+
+          <div class="">
+            <h5 class="sub_head text-grey"><img src="{%static 'img/images/title-Line.png' %}"> You’re the center of our
+              universe</h5>
+            <h2 class="primary_head">You’re in good company<span class="dot-bg">.</span></h2>
+            <div class="row">
+              <div class="col-lg-9">
+                <p class="text_common text-grey mt-0 mb-5">We always try to implement our creative ideas at the highest
+                  level.<br> You can see it by looking at our portfolio.</p>
+              </div>
+              <div class="col-lg-3">
+                <!-- <ul class="pagination-testi">
+                <li><a href="javascript:void(0)" class="prev_testi">PREV</a></li>
+                <li class="active"><a href="javascript:void(0)" class="next_testi">NEXT</a></li>
+              </ul> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section><!-- End Testimonials Section -->
+
+      <!-- ======= Testimonials Section ======= -->
+      <section class="good-company-bottom testimonials">
+
+        <div class="container-fluid" data-aos="fade-up">
+          <div data-aos="fade-up" data-aos-delay="200">
+            <div class="testimonials-slider">
+              <div class="swiper-wrapper">
+
+
+                <div class="testimonial-item no-bg">
+                  <p>
+                    “Anahit’s innovative and tailored insights helped us to make informed decisions on the go. Love the
+                    work you guys are doing.”
+                  </p>
+                  <div class="profile">
+                    <h3>Alfie Thomas</h3>
+                    <h4>Lead marketing specialist</h4>
+                  </div>
+                </div>
+
+
+
+                <div class="testimonial-item next-testi">
+                  <p>
+                    “A lot of our investment decisions were based on tips received through the grapevine. Anahit’s
+                    insight services changed the way we make investment decisions.”
+                  </p>
+                  <div class="profile">
+
+                    <h3>Oscar Martin</h3>
+                    <h4>DLead marketing specialist</h4>
+                  </div>
+                </div>
+
+
+
+                <div class="testimonial-item next-testi">
+                  <p>
+                    “I’d say Anahit is a very a unique platform backed by a strong team. You can’t go wrong with
+                    real-time alerts and free investment insights services.”
+                  </p>
+                  <div class="profile">
+
+                    <h3>Samantha Blaese</h3>
+                    <h4>Lead marketing specialist</h4>
+                  </div>
+                </div>
+
+
+
+                <div class="testimonial-item next-testi">
+                  <p>
+                    Fintech is booming and Anahit isn’t just another platform that popped up. They master the art of
+                    providing timely investment insights and alerts. Highly recommend them.”
+                  </p>
+                  <div class="profile">
+
+                    <h3>Elizabeth Moore</h3>
+                    <h4>Lead marketing specialist</h4>
+                  </div>
+                </div>
+                <div class="testimonial-item next-testi">
+                  <p>
+                    “A lot of our investment decisions were based on tips received through the grapevine. Anahit’s
+                    insight services changed the way we make investment decisions.”
+                  </p>
+                  <div class="profile">
+
+                    <h3>Oscar Martin</h3>
+                    <h4>DLead marketing specialist</h4>
+                  </div>
+                </div>
+
+
+
+                <div class="testimonial-item next-testi">
+                  <p>
+                    “I’d say Anahit is a very a unique platform backed by a strong team. You can’t go wrong with
+                    real-time alerts and free investment insights services.”
+                  </p>
+                  <div class="profile">
+
+                    <h3>Samantha Blaese</h3>
+                    <h4>Lead marketing specialist</h4>
+                  </div>
+                </div>
+
+
+
+                <div class="testimonial-item next-testi">
+                  <p>
+                    Fintech is booming and Anahit isn’t just another platform that popped up. They master the art of
+                    providing timely investment insights and alerts. Highly recommend them.”
+                  </p>
+                  <div class="profile">
+
+                    <h3>Elizabeth Moore</h3>
+                    <h4>Lead marketing specialist</h4>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section><!-- End Testimonials Section -->
+
+      <section class="latest-idea count_section">
+        <div class="container" data-aos="fade-up">
+          <div class="row">
+            <div class="col-lg-12">
+              <h5><img src="{%static 'img/images/title-Line.png' %}" class="grayscale img-fluid"> You’re the center of
+                our universe</h5>
+              <h2>The latest on <br>investment ideas<span class="dot-bg">.</span></h2>
+              <p>Learn more about what’s happening in the market with<br> these insightful articles from investment
+                experts.</p>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 px-md-2 px-0">
+                {% if blogs %}
+                {% for blog in blogs %}
+
+                <div class="post-left">
+                  <div class="post-img">
+                    <a href="/blog/{{blog.slug}}"><img src="{% if blog.thumbnail %}{{blog.thumbnail.url}} {% else %} {% static 'img/images/gradientoverlay.png' %} {% endif %}"
+                     class="grayscale img-fluid"></a>
+                  </div>
+                  <div class="content-right">
+                    {% for tag in blog.tags.all %}
+                    <a class="cate_badge">{{tag.name}}</a>
+                    {% endfor %}
+                     <span class="blog_publish">{{blog.created_at}}</span></h6>
+                    <h3 class="text_dotted mb-3">{{blog.body | safe}}</h3>
+                    <div class="line_bottom">
+                      <a href="/blog/{{blog.slug}}" class="stroke_btn">READ MORE</a>
+                      <hr class="hr_bg" />
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+
+              <div class="col-lg-1"></div>
+
+              <div class="col-lg-5 px-md-2 px-0">
+                <div class="ins blog">
+                  <div class="c1"></div>
+                  <div class="c2"></div>
+                  <div class="c3"></div>
+                  <div class="c4"></div>
+                  <div class="c5"></div>
+                </div>
+                {% if single_blog %}
+                  <a href="/blog/{{single_blog.slug}}" class="d-block">
+                    <span class="post-right bottom_100 d-block">
+                      <img src="{% if single_blog.thumbnail %}{{single_blog.thumbnail.url}} {% else %} {% static 'img/images/gradientoverlay.png' %} {% endif %}" class="grayscale img-fluid w-100">
+                      <span class="content-right big d-block">
+                        <span class="">
+                          {% for tag in single_blog.tags.all %}
+                          <span class="cate_badge">{{tag.name}}</span>
+                          {% endfor %}
+                           <span
+                            class="blog_publish">{{single_blog.created_at}}</span></span>
+                        <span class="text_dotted post_right_content d-block">{{single_blog.body | safe}}</span>
+                      </span>
+                    </span>
+                  </a>
+                {% endif %}
+              </div>
+              <div class="col-lg-2"></div>
+            </div>
+          </div>
+      </section>
+
+
+      <!-- ======= Values Section ======= -->
+      <section class="build last-section count_section">
+
+        <div class="container-fluid px-md-3 px-0" data-aos="fade-up">
+
+          <div class="row">
+
+            <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <div class="build-box">
+                <h5><img src="{%static 'img/images/title-Line.png' %}"> Got questions?</h5>
+                <h3>Learn More<span class="dot-bg">.</span></h3>
+                <p>Connect with the Anahit support team to <br> get your questions answered.</p>
+                <h6><a href="/contact_us">Talk to us</a></h6>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mt-lg-0 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="400">
+              <div class="box">
+                <img src="{%static 'img/images/get-quote.png' %}" class="img-fluid grayscale" alt="">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section><!-- End Values Section -->
+
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    {% include 'includes/footer.html' %}
+    <!-- End Footer -->
+
+  </div>
+</div>
+<div class="modal fade" id="video_popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <video controls class="w-100">
+          <source src="{% static 'video/dummy.mp4' %}" type="">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

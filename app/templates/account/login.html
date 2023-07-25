@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+{% block content %}
+<div class="main_wrapper">
+  <div class="right_bar d-flex justify-content-center py-4">
+    <a id="previous_page" href="{% url 'home' %}" class="">
+        <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+        <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)"/>
+            <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round"/>
+            <defs>
+            <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FCB854"/>
+            <stop offset="0.479066" stop-color="#D96534"/>
+            <stop offset="0.817115" stop-color="#DC4E4F"/>
+            <stop offset="1" stop-color="#DD425D"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FCB854"/>
+            <stop offset="0.479066" stop-color="#D96534"/>
+            <stop offset="0.817115" stop-color="#DC4E4F"/>
+            <stop offset="1" stop-color="#DD425D"/>
+            </linearGradient>
+            </defs>
+            </svg>             
+    </a>
+  </div>
+    <div class="">
+    <div class="pt-3 px-md-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex align-items-center justify-content-center">
+                            <div class=" mx-auto">
+                                <a href="{% url 'home' %}" class="">
+                                    <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login_page_wrapper py-3">
+        <div class="container">
+            <div class="login_wrapper">
+                <!-- {% for message in messages %}
+                    {%if "password_updated" in message.tags %}
+                        <div class="alert alert-success" id ="message_timeout">
+                         {{message}}
+                        </div>
+                    {% endif %}
+                    {% if "email_confirmed" in message.tags %}
+                        <div class="alert alert-success" id ="message_timeout">
+                            {{message}}
+                        </div>
+                    {% endif %}
+                {% endfor %} -->
+
+                <script>                        
+                    var message_timeout = document.getElementById("message_timeout");
+                    setTimeout(function(){ 
+                    message_timeout.style.display = "none"; 
+                    }, 6000);
+                </script>
+
+                <form  method="post"> 
+
+                  {% csrf_token %}  
+                  <div class="row mt-2">
+
+                    <div class="row  mb-3">
+                        <div class="col-md-5 mx-auto">
+                            <div class="password_toggle">
+                                {{ form.login.label_tag }}
+                                {{ form.login }}
+                                {{ form.login.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  mb-4">
+                      <div class="col-md-5 mx-auto">
+                          {{ form.password.label_tag }}
+                        <div class="password_toggle">
+                            {{ form.password }}
+                            {{ form.password.errors }}
+                            <button type="button" id="password1" class="pass_eye">
+                                <img src="/static/img/images/icon_eye.png">
+                              </button>
+                        </div>
+                      </div>
+                  </div>    
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+
+                    <div class="row mb-4">
+                        <div class="col-md-5 mx-auto">
+                            <button type="submit" id="btn" class="post_comment_btn w-100 m-0" >Login</button>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                {% if form.errors %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-error">
+                  <strong id='error_message_display'>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                </form>  
+                <div class="text-center mb-4">
+                    <form action="{% provider_login_url "facebook" method="oauth2" %}" method="oauth2" class="mb-2 d-inline-block">
+                        {% csrf_token %}
+                        <button type="submit" class="facebook_btn border-0 social_btn"><i class="fab fa-facebook-f"></i></button>
+                    </form>
+                    <form action ="{% provider_login_url 'google' %}" method ="post" class="mb-2 d-inline-block">
+                        {% csrf_token %}
+                        <button type="submit" class="google_btn border-0 social_btn"><i class="fab fa-google-plus-g"></i></button>
+                    </form>
+                </div>
+                <div class="text-center">
+                    <p class="text-grey login_text mb-2">Forgot Password? <span class="ms-2"> <a class="gradient_text" href="{% url 'account_reset_password' %}">Click here.</a> </span></p>
+                    <p class="text-grey login_text mb-2">Login with email? <span class="ms-2"> <a class="gradient_text" href="{% url 'magiclink:login' %}">Click here.</a> </span></p>
+
+                </div>
+                <div class="text-center">
+                    <a class="gradient_text login_text mb-0" href="{% url 'account_signup' %}">Register.</a>
+                </div>
+            </div>
+        </div>
+    </div>    
+{% include 'includes/footer.html' %}
+</div>
+
+<!-- End Footer -->
+
+{% endblock %}
+
+{% block script %}
+<script>
+function myFunction(x) {
+    
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  jQuery('#password1').on('click', function(){
+    var x = document.getElementById("id_password");
+    myFunction(x)
+  });
+</script>
+ <script type="text/javascript">
+ //       var count = 0;
+    //     var btn = document.getElementById("btn");
+    //     var disp = document.getElementById("error_message_display");
+  
+    //     btn.onclick = function () {
+    //         count++;
+    //         console.log(count)
+    //         if (count == 2){
+    // alert('you have clicked thrice')
+        //     }
+        // }   
+
+// var email = document.getElementById("id_email");
+// var password = document.getElementById("id_password");
+
+// if (email == '' && password == ''){
+// alert('all good')
+// }
+// else{
+// alert('not good')
+
+// }
+
+// var a = jQuery("div[id='error_message_display']").length
+// alert(a)
+
+</script>
+  
+{% endblock %}

@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link href="{% static 'css/stripe.css' %}" rel="stylesheet">
+
+<style>
+    .checkout_wrapper {
+        background: url("{% static 'img/images/lines-bg.png' %}") no-repeat;
+        background-size: contain;
+    }
+
+    .ps-6 {
+        padding-left: 8rem !important;
+    }
+    .plan-item{
+        background: #080A12;
+    }
+    .plan-item .name{
+        font-size: 1.5rem;
+    }
+    .plan-item .price{
+        font-size: 2.5rem;
+    }
+    .plan-item .price_sign{
+        font-size:1rem;
+        margin-right: 1rem;
+        margin-top: 0.5rem;
+
+    }
+    .plan-item .month{
+        font-size: 0.75rem;
+    }
+    .plan_features .feature{
+        font-size: 0.8rem;
+        color: gray;
+    }
+    .plan-item:nth-child(2) {
+        transform: scale(1.1);
+    }
+    .plan-item:nth-child(2) .plan_features{
+        background: linear-gradient(180deg, #2c2f39 0%, rgb(226 227 234 / 0%) 100%);
+   }
+    .plan-item:nth-child(2) .plan_name_price{
+        background: linear-gradient(65.49deg, #FCB854 7.03%, #D96534 45.79%, #DC4E4F 73.14%, #DD425D 87.94%);
+   }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="main-wrap">
+
+    <!-- ======= Left side bar ======= -->
+    {% include "includes/sidebar.html" %}
+    <!-- End Header -->
+
+    <div class="right-bar">
+        <!-- ======= Header ======= -->
+        {% include "includes/header.html" %}
+        <!-- End Header -->
+
+        <!-- ======= Main Content ======= -->
+
+        <div class="checkout_wrapper" style="margin-top: 150px;">
+            <div class="container ps-6">
+                <!-- <div class="row mt-3">
+                    <div class="col">
+                        <div class="blog-title d-flex align-items-center">
+                            <svg width="50" height="1" viewBox="0 0 60 1" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <line y1="0.5" x2="60" y2="0.5" stroke="#A9AFC3" />
+                            </svg>
+                            <h6 style="color: #A9AFC3" class="text-gray  m-0 ms-2">how much does it cost</h6>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <h1 class="text-white font-weight-600">Checkout <span class="dot-bg">.</span></h1>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-9 col-md-6">
+                        {% if existing_pending_subs %}
+                        <div class="alert alert-warning">
+                            <p>You have a pending subscription. Please confirm it instead of creating new .</p>
+                        </div>
+                         <p>{{existing_pending_subs.logs.payment_secret}}</p> 
+                        <input type="hidden" id="pending_intent_secret" value="{{existing_pending_subs.logs.payment_secret}}:{{existing_pending_subs.logs.payment_method}}">
+                        <a id="pending_subscription_confirm" onclick="confirmPendingSubscription()" class="getstarted" href="javascript:void(0)"> Confirm your subscription</a>
+                        {% endif %}
+
+                    </div>
+                    
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <h3 class="text-white font-weight-600">Pay for {{selected_plan.plan_name}}</h3>
+                        <h3 class="text-gray font-weight-500">$ {{selected_plan.price}}</h3>
+                        <div class="checkout_div bb-dashed-grey">
+                            <h3 class="checkout_head">Investment</h3>
+                            <p class="text-uppercase text_common text-grey"><b>Investment</b> Sessions / month</p>
+                        </div>
+                        <div class="price_checkout_sec bb-dashed-grey pt-3">
+                            <p class="price_check login_text text-start align-items-center text-grey mb-2"><span class="price_plan me-2">${{selected_plan.price}}</span><span>per<br/>month</span></p>
+                            <p class="login_text text-grey text-start mb-4">Make progress on your goals. With this plan, you get 4 coaching sessions per month with a certified coach, access to a library of curated learning content, and professional planning resources.</p>
+                            <p class="recurring_plan login_text text-grey text-start mb-4"><img src="{% static 'img/images/renew.png' %}" class="me-3">Monthly recurring subscription (cancel any time)</p>
+                        </div>
+                        <div class="total_price_sec">
+                            <div class="d-flex justify-content-between bb-dashed-grey py-3">
+                              <p class="login_text text-grey text-start mb-0">Anahit Ivestment Premium<br/>Billed Monthly</p>
+                              <p class="login_text text-grey text-start mb-0">${{selected_plan.price}}</p>
+                            </div>
+                            <div class="d-flex justify-content-between py-3 bb-dashed-grey">
+                              <p class="login_text text-grey text-start mb-0">Subtotal</p>
+                              <p class="login_text text-grey text-start mb-0">${{selected_plan.price}}</p>
+                            </div>
+                        </div>
+                        <div class="py-4 bb-dashed-grey">
+                            <button class="promo_btn">Add promotion code</button>
+                        </div>
+                        <div class="total_due py-3">
+                            <div class="d-flex justify-content-between">
+                              <p class="login_text text-grey text-start">Total due today</p>
+                              <p class="total_due_text">${{selected_plan.price}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 mx-auto">
+                        <div class=" card mx-auto p-4 " style="">
+                            <div class="">
+                                <div class="row">
+                                    <div id="payment-request-button"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 mx-auto d-flex mb-3 align-items-center">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" value="{{request.user.get_full_name}}"
+                                            placeholder="" aria-describedby="emailHelp">
+                                    </div>
+
+                                    <div class="col-12 mx-auto d-flex mb-3 align-items-center">
+                                        <label for="email" class="form-label"> Email</label>
+                                        <input type="email" class="form-control" id="email"
+                                            value="{{request.user.email}}" aria-describedby="emailHelp">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+                            <form id="subscription-form">
+                                <div id="card-element1" class="MyCardElement1">
+                                    <!-- Elements will create input elements here -->
+                                </div>
+                                <div id="card-element" class="MyCardElement">
+                                    <!-- Elements will create input elements here -->
+                                </div>
+
+                                <!-- We'll put the error messages in this element -->
+                                <div id="card-errors" role="alert"></div>
+                                    <button id="submit" type="submit">
+                                        <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner"
+                                            role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <input type="hidden" id="price_id" value="{{selected_plan.stripe_price_id}}">
+                                        <input type="hidden" id="publishable_key" value="{{publishable_key}}">
+                                        <input type="hidden" id="setup_intent_secret" value="{{setup_intent_secret}}">
+                                        <span id="button-text">Subscribe</span>
+                                    </button>
+                            
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- ======= Footer ======= -->
+        {% include "includes/footer.html" %}
+        <!-- End Footer -->
+    </div>
+
+
+
+
+</div>
+
+
+{% endblock %}
+
+
+
+{% block script %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'js/checkout.js' %}"></script>
+
+{% endblock %}

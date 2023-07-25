@@ -1,0 +1,45 @@
+.custom-input{
+    background-color: inherit !important;
+    padding: .545rem 0.75rem !important;
+    color: white !important;
+    border: 1px solid #515456 !important;
+}
+body.light-mode .custom-input
+{
+  color: #464646 !important;
+}
+.custom-input:focus {  
+    color: #fff !important;
+    border: 1px solid #515456 !important;
+    box-shadow: none !important;
+}
+
+.gradient_text{
+    background: linear-gradient(to right, #FCB854 7.03%, #D96534 45.79%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+}
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #D96534;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin: 40px auto;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

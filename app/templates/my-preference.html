@@ -1,0 +1,489 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="main_wrapper">
+  <div class="right_bar d-flex justify-content-center py-4">
+    <div>
+      <a href="{% url 'home' %}" class=" ">
+        <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+        <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)" />
+          <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FCB854" />
+              <stop offset="0.479066" stop-color="#D96534" />
+              <stop offset="0.817115" stop-color="#DC4E4F" />
+              <stop offset="1" stop-color="#DD425D" />
+            </linearGradient>
+            <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FCB854" />
+              <stop offset="0.479066" stop-color="#D96534" />
+              <stop offset="0.817115" stop-color="#DC4E4F" />
+              <stop offset="1" stop-color="#DD425D" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="">
+    <div class="pt-3 px-md-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex align-items-center justify-content-center">
+              
+              <div class=" mx-auto">
+                <a href="{% url 'home' %}" class="">
+                  <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login_page_wrapper my-account-wrap count_section top_section text-grey py-3">
+    <div class="container">
+      <div class="login_wrapper">
+        <div class="pricing-headings mb-5 d-flex justify-content-between">
+          <div class=""></div>
+          <div class="profile-dropdown dropdown">
+            <img class="dropdown-toggle profile-dropdown-img" src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}" alt="profile-dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"/>
+            <div class="dropdown-menu dropdown_user mt-2 p-3" aria-labelledby="dropdownMenuButton1">
+                <div class="d-flex align-items-center">
+                    <img src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}" class="dropdown-profile-img" />                <div class="ms-3">
+                  <h5 class="user-name">{{ request.user.email }}</h5>
+
+                </div> 
+              </div>
+              <ul class="user-menu  p-0 mt-4 mb-0">
+                <li><a class="dropdown-item" href="{% url 'my_account' %}"><img class="hover-hide me-2" src="{% static 'img/images/user_acc.png' %}"/><img class="hover-active me-2" src="{% static 'img/images/user-grdt.png' %}"/>My Account</a></li>
+
+                <li><a class="dropdown-item" href="{% url 'user_preference' %}"><img class=" me-2"
+                      src="{% static 'img/images/Preference.png' %}" />My Preferences</a></li>
+                      <li><a class="dropdown-item" href="{% url 'invoice_history' %}"><img class="hover-hide me-2"
+                        src="{% static 'img/images/prev-order.png' %}" /><img class="hover-active me-2"
+                        src="{% static 'img/images/prev-order-grd.png' %}" />My Previous Orders</a></li>
+                <!-- <li><a class="dropdown-item" href="{% url 'account_logout' %}"><img class=" me-2" src="{% static 'img/images/exit.png' %}"/>Log out</a></li> -->
+                <form action="{% url 'account_logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item"><img class=" me-2"
+                      src="{% static 'img/images/exit.png' %}" />Logout</button>
+                </form>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="pricing-headings">
+          <h5 class="sub_head text-grey"><img class="head_line" src="/static/img/images/title-Line.png"> how much does
+            it cost’s</h5>
+          <h2 class="primary_head">My Preferences<span class="dot-bg">.</span></h2>
+          <p class="p-left ps-0 ms-0 text-grey mb-70">Research stocks and understand market trends all in one place </p>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <form class="row g-3 needs-validation" method="post" novalidate>
+              {% csrf_token %}
+
+              <!--  {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" id="django_message">
+                         {{message}}
+                        </div>
+                      {% endfor %} -->
+
+
+              <!-- showing messages accordng to conditons -->
+              {% for message in messages %}
+              {%if "preferences_set" in message.tags %}
+              <div class="alert alert-success" id="django_message">
+                {{message}}
+              </div>
+              {% endif %}
+              {%if "updated" in message.tags %}
+              <div class="alert alert-success" id="django_message">
+                {{message}}
+              </div>
+              {% endif %}
+              {% endfor %}
+
+              <!-- display messages on frontend only for 3 seconds   -->
+              <script>
+                var message_timeout = document.getElementById("django_message");
+                setTimeout(function () {
+                  message_timeout.style.display = "none";
+                }, 5000);
+              </script>
+              <div class="personal-information ">
+                <h5 class="text-grey mb-5">Personal Information</h5>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="custom-form-control" id="name" name="name" {% if request.user.first_name %}value="{{ request.user.first_name }} {{ request.user.last_name }}" {% endif %} disabled>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <input type="text" class="custom-form-control" id="gender" name="gender" {% if request.user.gender %}value="{{ request.user.gender }}" {% endif %} disabled>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="birthday" class="form-label">Birthday</label>
+                    <input type="text" class="custom-form-control" id="birthday" name="birthday" {% if request.user.date_of_birth %}value="{{ request.user.date_of_birth }}" {% endif %} disabled>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div>
+                      <label for="phone" class="form-label">Phone Number</label>
+                      <div class="d-flex">
+                        <input type="tel" id="country_code" class="custom-form-control me-2 country-code" {% if
+                          request.user.country_code %} value="{{ request.user.country_code }}" {% endif
+                          %}name="country_code" disabled>
+                        <input type="number" class="custom-form-control mob-number" id="phone" aria-describedby="" {% if request.user.phone %}value="{{ request.user.phone }}" {% endif %} name="phone" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="asset_choices" class="form-label">Asset Class</label>
+                    <div class="stock_select_div country_div" id="asset_error">
+                      <select class="custom-form-select assest_multi_select" multiple aria-label="Default select example" name="asset_choices"
+                        id="asset_choices" {% if user_plan.plan.plan_name == free_plan %} onchange="maxAllowedMultiselect(this, 1)" {% else %} onchange="maxAllowedMultiselect(this, 2)" {% endif %}>
+                        {% if asset_choices %}
+                        {% for key,value in asset_choices %}
+                        <option value="{{ key }}">{{ value }}</option>
+
+                        {% endfor %}
+
+                        {% endif %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="country" class="form-label">Investment Country</label>
+                    <div class="country_div" id="country_error">
+                      {% if investment_country %}
+                      <select class="custom-form-select mb-3 cls-multi-select" aria-label="Default select example"
+                        name="country" id="investment_country_0" multiple {% if user_plan.plan.plan_name == free_plan %} onchange="maxAllowedMultiselect(this, 1)" {% else %} onchange="maxAllowedMultiselect(this, 200)" {% endif %}>
+                        {% for name in investment_country %}
+                        <option value="{{ name.code }}">{{ name.name }}</option>
+
+                        {% endfor %}
+
+                      </select>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <!--   <input id="selected_countries" name = "selected_countries" style="display: None;" value="0" type="text"/> -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3 select_box" id="investment_risk_error">
+                      <label for="investment_risk" class="form-label">How much risk are you willing to accept?</label>
+                      <select class="custom-form-select" aria-label="Default select example" name="investment_risk"
+                        id="investment_risk">
+                        <option value="" disabled selected>--Select--</option>
+                        {% if investment_risk %}
+                        {% for key,value in investment_risk %}
+                        <option value="{{ key }}">{{ value }}</option>
+
+                        {% endfor %}
+
+                        {% endif %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3 select_box" id="investment_term_error">
+                      <label for="investment_term" class="form-label">What is your investment timeframe?</label>
+                      <select class="custom-form-select" aria-label="Default select example" name="investment_term"
+                        id="investment_term">
+                        <option value="" disabled selected>--Select--</option>
+                        {% if investment_term %}
+                        {% for key,value in investment_term %}
+                        <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                        {% endif %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3 select_box" id="investment_objective_error">
+                      <label for="investment_objective" class="form-label">What investment objective(s) are you looking
+                        to achieve from this investment?</label>
+                      <select class="custom-form-select" aria-label="Default select example" name="investment_objective"
+                        id="investment_objective">
+                        <option value="" disabled selected>--Select--</option>
+                        {% if investment_objective %}
+                        {% for key,value in investment_objective %}
+                        <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                        {% endif %}
+                      </select>
+                    </div>
+                  </div>
+                  <button class="secondary_btn submit_button" onclick="getData()">submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {% include 'includes/footer.html' %}
+</div>
+<!-- End Footer -->
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+
+  $(document).ready(function () {
+    $('.cls-multi-select').select2();
+    $('.assest_multi_select').select2();
+    $('.custom-form-select').select2({
+      minimumResultsForSearch: -1
+    });
+  });
+  var togglePassword = document.querySelectorAll(".passwordToggle");
+  var password = document.querySelector("#id_password1");
+
+  for (var i = 0; i < togglePassword.length; i++) {
+    togglePassword[i].addEventListener("click", function () {
+      // toggle the type attribute
+      var type = this.previousElementSibling.getAttribute("type") === "password" ? "text" : "password";
+      this.previousElementSibling.setAttribute("type", type);
+      // toggle the eye icon
+      this.firstElementChild.classList.toggle('fa-eye');
+      this.firstElementChild.classList.toggle('fa-eye-slash');
+    });
+  }
+
+
+  // <<<<<<<<<<<<<<<<old dropdown funtionality>>>>>>>>>>>>>>>>>  
+
+  // var available_values = [{% for name in investment_country %}['{{ name.name|escapejs }}','{{ name.code|escapejs }}'],{% endfor %}];
+
+  // function action_existing_select_boxes(get_values=false) {
+  //   var country = document.getElementsByName("country");
+  //   if (get_values){
+  //     let values = []
+  //     for (var i = 0; i < country.length; i++) {
+  //       let element = country[i]
+  //       if (element.value){
+  //         let val = [
+  //           element.options[element.selectedIndex].text,
+  //           element.value
+  //         ]
+  //         values.push(val)
+  //       }
+  //     }
+  //     return values
+  //   }else{
+  //     return country.length
+  //   }
+
+  // }
+  // function disable_used(){
+  //   var country = document.getElementsByName("country");
+  //   for (var i = 0; i < country.length; i++) {
+  //     country[i].disabled=true
+  //   }
+  //   return country.length
+  // }
+  // function get_unselected_values() {
+  //   var selected_values = action_existing_select_boxes(true)
+  //   var unselected=available_values.filter((obj)=>{
+  //     return !selected_values.flat().includes(obj[0])
+  //   })
+  //   return unselected
+  // }
+
+  // function check_if_selected(){
+  //   var country = document.getElementsByName("country");
+  //   var add = true
+  //   for (var i = 0; i < country.length; i++) {
+  //     let element = country[i]
+  //     if (!element.value){
+  //       add= false
+  //     }
+  //   }
+  //   return add;
+  // }
+
+  // $(document).ready(function(){
+  //   $('.add_country_btn').click(function(){
+  //     var add = check_if_selected()
+  //     if (add){
+  //       var used_count = disable_used()
+  //       var existing_boxes = action_existing_select_boxes()
+  //       if (existing_boxes<available_values.length){
+  //         var country_div = document.createElement("div");
+  //         country_div.className = "d-flex align-items-center appended_div mt-3";
+  //         var i_tag = document.createElement("i");
+  //         i_tag.className = "fas fa-trash-alt delete-icon cursor_p"
+  //         i_tag.id = used_count;
+  //         var select = document.createElement("select");
+  //         select.className = "custom-form-select mb-3"
+  //         select.setAttribute("name","country")
+  //         select.setAttribute("id","investment_country_"+used_count)
+  //         var opt = document.createElement('option');
+  //         opt.innerHTML = '--Select--';
+  //         opt.value="";
+  //         opt.selected=true;
+  //         opt.disabled=true;
+  //         select.appendChild(opt);
+  //         let available_options = get_unselected_values()
+  //         for (var i = 0; i<=available_options.length-1; i++){
+  //           var [name,code]=available_options[i];
+  //           var opt = document.createElement('option');
+  //           opt.value = code;
+  //           opt.innerHTML = name;
+  //           select.appendChild(opt);
+  //         }
+  //         country_div.appendChild(select)
+  //         country_div.appendChild(i_tag)
+  //         $('.country_div').append(country_div);
+  //       }
+  //     }
+  //   })
+
+  //   $(document).on('click' , '.delete-icon' , function(){
+  //     prev_ele_id = "investment_country_"+($(this).parent().find("select").attr("id").replace("investment_country_","")-1)
+
+  //     $('#'+prev_ele_id).removeAttr("disabled", false);  
+  //     $(this).parent().remove();
+  //     // $('select').prop("disabled", false);
+  //   })
+  //   $('.add_stock_btn').click(function(){
+  //     $('.stock_select_div').append(stock_div);
+  //   })
+  //   $(document).on('click' , '.delete-stock-icon' , function(){
+  //     $(this).parent().remove();
+  //   })
+  // })
+
+
+  // function getData() {
+  //   let values = []
+  //   var country = document.getElementsByName("country");
+  //   for (var i = 0; i < country.length; i++) {
+  //     let val = country[i].value
+  //     if (val){
+  //       values.push(val)
+  //     }
+  //   }
+  //   let str_val = values.join(",");
+  //   document.getElementById("selected_countries").value=str_val;
+  //   // alert(str_val)
+  // }
+
+
+
+
+  $('.submit_button').on("click", function () {
+    var asset_choices = $("#asset_choices").val();
+    var country = $("#investment_country_0").val();
+    var investment_risk = $("#investment_risk").val();
+    var investment_term = $("#investment_term").val();
+    var investment_objective = $("#investment_objective").val();
+
+    var validationError = false;
+    var paras = document.getElementsByClassName('errors');
+    while (paras[0])
+      paras[0].parentNode.removeChild(paras[0]);
+    if (asset_choices == '' || asset_choices == null) {
+      var x = document.createElement("LABEL");
+      x.style.color = 'red';
+      x.className = 'errors';
+      x.innerHTML = "Select atleast one asset class";
+      document.getElementById('asset_error').appendChild(x);
+      validationError = true;
+      return false;
+    }
+
+    if (country == '' || country == null) {
+      var x = document.createElement("LABEL");
+      x.style.color = 'red';
+      x.className = 'errors';
+      x.innerHTML = "Select atleast one country";
+      document.getElementById('country_error').appendChild(x);
+      validationError = true;
+      return false;
+
+    }
+
+    if (investment_risk == '' || investment_risk == null) {
+      var x = document.createElement("LABEL");
+      x.style.color = 'red';
+      x.className = 'errors';
+      x.innerHTML = "Select atleast one risk plan";
+      document.getElementById('investment_risk_error').appendChild(x);
+      validationError = true;
+      return false;
+
+    }
+
+    if (investment_term == '' || investment_term == null) {
+      var x = document.createElement("LABEL");
+      x.style.color = 'red';
+      x.className = 'errors';
+      x.innerHTML = "Select atleast one timeframe";
+      document.getElementById('investment_term_error').appendChild(x);
+      validationError = true;
+      return false;
+
+    }
+
+    if (investment_objective == '' || investment_objective == null) {
+      var x = document.createElement("LABEL");
+      x.style.color = 'red';
+      x.className = 'errors';
+      x.innerHTML = "Select atleast one objective";
+      document.getElementById('investment_objective_error').appendChild(x);
+      validationError = true;
+      return false;
+
+    }
+
+    return true;
+
+  });
+</script>
+
+<script>
+    function maxAllowedMultiselect(obj, maxAllowedCount) {
+            var selectedOptions = jQuery('#'+obj.id+" option[value!=\'\']:selected");
+            if (selectedOptions.length >= maxAllowedCount) {
+                if (selectedOptions.length > maxAllowedCount) {
+                    selectedOptions.each(function(i) {
+                        if (i >= maxAllowedCount) {
+                            jQuery(this).prop("selected",false);
+                        }
+                    });
+                }
+                jQuery('#'+obj.id+' option[value!=\'\']').not(':selected').prop("disabled",true);
+            } else {
+                jQuery('#'+obj.id+' option[value!=\'\']').prop("disabled",false);
+            }
+        }
+</script>
+
+
+{% endblock %}

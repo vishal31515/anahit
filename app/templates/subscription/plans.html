@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+
+<style>
+    .checkout_wrapper {
+        background: url("{% static 'img/images/lines-bg.png' %}") no-repeat;
+        background-size: contain;
+    }
+
+    .ps-6 {
+        padding-left: 8rem !important;
+    }
+    .plan-item{
+        background: #080A12;
+    }
+    .plan-item .name{
+        font-size: 1.5rem;
+    }
+    .plan-item .price{
+        font-size: 2.5rem;
+    }
+    .plan-item .price_sign{
+        font-size:1rem;
+        margin-right: 1rem;
+        margin-top: 0.5rem;
+
+    }
+    .plan-item .month{
+        font-size: 0.75rem;
+    }
+    .plan_features .feature{
+        font-size: 0.8rem;
+        color: gray;
+    }
+    .plan-item:nth-child(2) {
+        transform: scale(1.1);
+    }
+    .plan-item:nth-child(2) .plan_features{
+        background: linear-gradient(180deg, #2c2f39 0%, rgb(226 227 234 / 0%) 100%);
+   }
+    .plan-item:nth-child(2) .plan_name_price{
+        background: linear-gradient(65.49deg, #FCB854 7.03%, #D96534 45.79%, #DC4E4F 73.14%, #DD425D 87.94%);
+   }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="main-wrap">
+
+    <!-- ======= Left side bar ======= -->
+    {% include "includes/sidebar.html" %}
+    <!-- End Header -->
+
+    <div class="right-bar">
+        <!-- ======= Header ======= -->
+        {% include "includes/header.html" %}
+        <!-- End Header -->
+
+        <!-- ======= Main Content ======= -->
+
+        <div class="checkout_wrapper" style="margin-top: 150px;">
+            <div class="container ps-6">
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="blog-title d-flex align-items-center">
+                            <svg width="50" height="1" viewBox="0 0 60 1" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <line y1="0.5" x2="60" y2="0.5" stroke="#A9AFC3" />
+                            </svg>
+                            <h6 style="color: #A9AFC3" class="text-gray  m-0 ms-2">how much does it cost</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <h1 class="text-white font-weight-600">Prices Packages <span class="dot-bg">.</span></h1>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <p class="text-gray">We’ve got a lot of awards for our products and services that became popular
+                            in the world.</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    {% for plan in plans %}
+                    <div class="col-12 col-md-3 mx-3 p-0 plan-item ">
+                        <div class="">
+                            <div class="plan_name_price d-flex flex-column align-items-center p-3">
+                                <div class="name text-white">{{plan.name}}</div>
+                                <div class="price text-white d-flex align-items-center pt-2 pb-2"> <span class="price_sign">$</span>{{plan.price}}</div>
+                                <div class="month text-white">Per Month</div>
+                            </div>
+                            <div class="plan_features text-center pt-4 mb-3">
+                                <p class="feature "> Customized Store Design</p>
+                                <p class="feature "> Customized Store Design</p>
+                                <p class="feature "> Customized Store Design</p>
+                                <p class="feature "> Customized Store Design</p>
+                                <p class="feature "> Customized Store Design</p>
+
+                            </div>
+                            <div class=" m-4">
+                                <!-- {% if existing_subscription %}
+                                {% endif %} -->
+                                {% if existing_subscription %}
+                                    {% if existing_subscription.plan.price == plan.price %}
+                                        <div><a class="getstarted scrollto disable" href="">Current</a></div>
+                                    {% else %}
+                                        <div><a class="getstarted scrollto" href="javascript:void(0)" 
+                                              onclick="updateSubscription('{{ existing_subscription.stripe_sub }}', '{{ plan.plan }}')">Switch</a></div>
+                                    {% endif %}
+                                {% else %}
+                                    {% if plan.price == 0 %}
+                                    <div><a class="getstarted scrollto disabled" href="">Current</a></div>
+                                    {% else %}
+                                    <div><a class="getstarted scrollto" href="{% url 'stripe_checkout' plan.plan %}">Buy Now</a></div>
+                                    {% endif %}
+                    
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ======= Footer ======= -->
+        {% include "includes/footer.html" %}
+        <!-- End Footer -->
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block script %}
+<script src="{% static 'js/plan.js' %}"></script>
+
+{% endblock %}

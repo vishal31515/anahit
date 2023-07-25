@@ -1,0 +1,501 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  .ps-6{
+     padding-left: 8rem !important; 
+  }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+    
+    <div class="right-bar">
+      <!-- ======= Header ======= -->
+      {% include 'includes/header.html' %}
+      <!-- End Header -->
+    
+      <div>
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="count_section top_section">
+
+    
+          <div class="container" data-aos="fade-up">
+            <div class="row gx-0">
+              <div class="col-lg-12  flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="">
+                  <h5 class="sub_head text-grey"><img src="{% static 'img/images/title-Line.png' %}"> our services</h5>
+                  <h3 class="primary_head">Get the complete picture <br class="mobile_hide" />of financial markets<span class="dot-bg">.</span></h3>
+                  
+                  <p class="text_common text-grey">Research stocks and understand market trends all in one place</p>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </section><!-- End About Section -->
+    
+    
+        <section class="about2 grid_banner">
+    
+          <div class="container" data-aos="fade-up">
+            <div class="row gx-0">
+    
+              <div class="row">
+                <div class="col-lg-6  flex-column justify-content-center text-center" data-aos="fade-up" data-aos-delay="200">
+                   <div class="t-icons first">
+                    <div class="fins-bg">
+                      <img src="{% static 'img/images/icon_finsights.png' %}" class="light_mode_hide">
+                      <img src="{% static 'img/images/finsights_dark.png' %}" class="light_mode_show">
+                    </div>
+                    <h4>Finsights</h4>
+                    <p>Access insights across asset categories, create watchlists, and interactive dashboards as per your investment management style and preferences. </p>
+                    <div class="line_bottom">
+                      <a href="{% url 'price' %}" class="stroke_btn">Subscribe</a>
+                      <hr class="hr_bg centered_stroke" />
+                    </div>
+                   </div>
+                </div>
+                <div class="col-lg-6  flex-column justify-content-center text-center" data-aos="fade-up" data-aos-delay="200">
+                  <div class="t-icons first">
+                    <div class="fins-bg">
+                      <img src="{% static 'img/images/global.png' %}" class="light_mode_hide">
+                      <img src="{% static 'img/images/finalerts_dark.png' %}" class="light_mode_show">
+                    </div>
+                    <h4>Finalerts</h4>
+                    <p>Uncover hidden opportunities with real-time investment alerts based on five pillars: macro analysis, fundamental analysis, technical analysis, social sentiment analysis, and technical analysis. </p>
+                    <div class="line_bottom">
+                      <a href="{% url 'price' %}" class="stroke_btn">Subscribe</a>
+                      <hr class="hr_bg centered_stroke" />
+                    </div>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ins top_section_pattrn">
+              <div class="c5"></div>
+              <div class="c6"></div>
+              <div class="c7"></div>
+          </div>
+    
+        </section><!-- End About Section -->
+        <!-- ======= Values Section ======= -->
+        <section class="build_sec count_section pb-0">
+    
+          <div class="container-fluid px-0" data-aos="fade-up">
+    
+            <div class="row mx-0">
+    
+              <div class="col-lg-6 px-lg-0 flex-column justify-content-center px-sm-3 px-0" data-aos="fade-up" data-aos-delay="200">
+                <div class="build-sec-box bg-dark">
+                  <h5 class="sub_head text-grey"><img src="{% static 'img/images/title-Line.png' %}" class="head_line"> Build a secure future with</h5>
+                <h3 class="primary_head">Discover unique insights<span class="dot-bg">.</span></h3>
+                <p class="finance_text text-grey"> Take the first step towards being free from financial <br class="mobile-hide">worries today. </p>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'account_login' %}" class="text-uppercase primary_btn subscribe_fin_btn">Subscribe to finsights</a>
+                {% endif %}
+              </div>
+              </div>
+    
+              <div class="col-lg-6 px-lg-0 mt-lg-0 flex-column justify-content-center px-sm-3 px-0" data-aos="fade-up" data-aos-delay="400">
+                <div class="box h-100">
+                  <img src="{% static 'img/images/calc.png' %}" class="img-fluid grayscale w-100 h-100 object-cover" alt="">
+                </div>
+              </div>
+    
+            </div>
+    
+          </div>
+    
+        </section><!-- End Values Section -->
+        <!-- Brand Section -->
+        <section class="brand-sec count_section">
+          <div class="container" data-aos="fade-up">
+            <div class="brand-inner">
+              <div class="mobile_hide">
+                <div class="row align-items-center">
+                  <div class="col-md-2">
+                    <div class="">
+                      <img src="{% static 'img/images/brand_1.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_2.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_3.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_4.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_5.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="desk-hide">
+                <div class="brand_slider">
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_1.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_2.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_3.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_4.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_5.png' %}" class="brand_img">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Brand Section end -->
+        <!-- Financial insights Section -->
+        <section class="financial_sec count_section">
+          <div class="container">
+            <div class="finan_inner">
+              <div class="mb-md-133">
+                <h5 class="sub_head text-grey"><img src="{% static 'img/images/title-Line.png' %}" class="head_line"> Know your next move with</h5>
+                <h3 class="primary_head">Financial insights<span class="dot-bg">.</span></h3>
+              </div>
+              <div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="mb-sm-0 mb-4">
+                      <img src="{% static 'img/images/finan_img.png' %}" class="w-100 h-100 object-cover">
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="finan_info ps-sm-3 ps-0">
+                      <h2 class="inner_head">Features</h2>
+                      <div class="mb-5">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="service_cat_card">
+                              <h3 class="info_head">Free insights on the go</h3>
+                              <p class="text_common text-grey">Visualise market trends, access critical insights, and make the right investment decision for different asset categories on the go, for free.</p>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="service_cat_card">
+                              <h3 class="info_head">Predict future trends</h3>
+                              <p class="text_common text-grey">Predict emerging investment trends with our proprietary data analytics solution that analyses thousands of structured and unstructured data points.</p>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="service_cat_card">
+                              <h3 class="info_head">Explore new opportunities</h3>
+                              <p class="text_common text-grey">Answer critical investment questions with intuitive investment data visualization and storytelling.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text_common text-grey">Without insights, we are just individuals with opinions. Get the facts right before making the next investment decision with financial insights that help you to:</p>
+                      <ul class="service_list mb-5">
+                        <li class="service-list-item text_common text-grey">Analyse trends with state-of-art interactive dashboards</li>
+                        <li class="service-list-item text_common text-grey">Identify momentum with predictive intelligence</li>
+                        <li class="service-list-item text_common text-grey">Explore new markets and make the right bets</li>
+                      </ul>
+                        <a href="{% url 'price' %}" class="text-uppercase primary_btn subscribe_btn">SUBSCRIBE</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Financial insights Section END -->
+        <!-- Video Section -->
+        <section class="video-sec count_section">
+          <div class="container" data-aos="fade-up">
+            <div class="video-inner">
+              <button class="play_btn" data-bs-toggle="modal" data-bs-target="#video_popup">
+                <img src="{% static 'img/images/btn_play.png' %}">
+              </button>
+          </div>
+        </section>
+        <!-- Video Section End -->
+        <!-- Real-time alerts Section -->
+        <section class="financial_sec count_section">
+          <div class="container">
+            <div class="finan_inner">
+              <div class="mb-md-133">
+                <h5 class="sub_head text-grey"><img src="{% static 'img/images/title-Line.png' %}" class="head_line"> Make the smartest bets with</h5>
+                <h3 class="primary_head">Real-time alerts<span class="dot-bg">.</span></h3>
+              </div>
+              <div>
+                <div class="row alter_row">
+                  <div class="col-md-8">
+                    <div class="finan_info ps-sm-3 ps-0">
+                      <h2 class="inner_head">Features</h2>
+                      <div class="mb-5">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="service_cat_card">
+                              <h3 class="info_head">Automated alerts on the go</h3>
+                              <p class="text_common text-grey">Stay on top of your investment strategy with automated real-time alerts on various proprietary data-driven indicators.</p>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="service_cat_card">
+                              <h3 class="info_head">Assess investment positioning</h3>
+                              <p class="text_common text-grey">Rebalance investments with investment and trading alerts personalised based on your risk profile, investment goals, and strategies.</p>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="service_cat_card">
+                              <h3 class="info_head">Find opportunities</h3>
+                              <p class="text_common text-grey">With our robust data platform, you are just a click away from finding opportunities that fit your goals and managing investments better.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text_common text-grey">Real-time alerts make investment effortless. The combination of macro analysis, fundamental analysis, technical analysis, social sentiment analysis, and technical analysis keeps you a step ahead of others. Use these real-time alerts to:</p>
+                      <ul class="service_list mb-5">
+                        <li class="service-list-item text_common text-grey">Monitor investment decisions made for you</li>
+                        <li class="service-list-item text_common text-grey">Create future-ready investment plans on the go</li>
+                        <li class="service-list-item text_common text-grey">Access data-driven intelligence on where to invest next</li>
+                      </ul>
+                      
+                        <a href= "{% url 'price' %}" class="text-uppercase primary_btn subscribe_btn">SUBSCRIBE</a>
+    
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="mb-sm-0 mb-4">
+                      <img src="{% static 'img/images/real_insight.png' %}" class="w-100 h-100 object-cover">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Real-time alerts Section END -->
+        <!-- start pricing section -->
+        <section class="pricing service_page count_section">
+          <div class="container">
+            {% for service in services %}
+            <div class="row">
+              <h2 class="inner_head">{{service.name}}</h2>
+              {% for plan in service.features_service.all %}
+           
+              <div class="col-lg-4 col-md-6 col-sm-6 p-0 ">
+                <div class="{% if forloop.counter == 2 %} card-ist-pricing h-100 crd-bg-scnd text-center pb-sm-0 pb-5 {% else %}card-ist-pricing h-100 mt-40 pb-5 crd-bg-ist text-center {% endif %}">
+                  <div class="{% if forloop.counter == 2 %}pricing-card2-gradient {% else %} pricing-card-simple {% endif %}">
+                    <h4 class="pricing-cards-heading color-w mb-3 desk-hide">Corporate</h4>
+                    <h4 class="pricing-cards-heading color-w mb-3 mobile_hide">{{plan.plan.name}}</h4>
+                    <h3 class="pricing-cards-rs color-w"><p class=""><sup class="pricing_text">$</sup><sub class="zero">{{plan.plan.price}}</sub><sup class="pricing_text"></sup></p></h3>
+                    <p class="pricing-cards-para color-w">per month</p>
+                  </div>
+                  <div class="pricing-cards-names color-w pt-5 px-5">
+                    {% for des in plan.metadata.values %}
+                    <h4 class="pricing-cards-name1 mb-4 py-1"> {{des}}</h4>
+                    {% endfor %}
+                  </div>
+                  {% if plan.plan.name == "Free" %}
+                  <button class="pricing-card-button color-w mt-4" type="button">Get Started </button>
+                  {% else %}
+                  <a href="{% if user.is_authenticated %} {% url 'stripe_checkout' product_id=plan.id %} {% else %} {% url 'login' %}{% endif %}">
+                    <button class="pricing-card-button color-w mt-4" type="button">Buy now</button>
+                  </a>
+                 {% endif %}
+                </div>          
+              </div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+          </div>  
+        </section>
+        <!--end pricing section  -->
+        <section class="faq_sec count_section">
+          <div class="container">
+            <div class="faq_inner">
+              <div class="mb-5">
+                <h5 class="sub_head text-grey"><img src="{% static 'img/images/title-Line.png' %}" class="head_line"> Make the smartest bets with</h5>
+                <h3 class="primary_head">Real-time alerts<span class="dot-bg">.</span></h3>
+              </div>
+              <div class="ins faq-patrn">
+                  <div class="c1"></div>
+                  <div class="c2"></div>
+                  <div class="c3"></div>
+                  <div class="c4"></div>
+                  <div class="c5"></div>
+                  <div class="c6"></div>
+                  <div class="c7"></div>
+                  <div class="c8"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item faq_item">
+                      <h2 class="accordion-header faq_header" id="headingOne">
+                        <button class="accordion-button faq_btn  px-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          What is Anahit?
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body faq_body">
+                          <p class="mb-0 text_common text-grey">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item faq_item">
+                      <h2 class="accordion-header faq_header" id="headingTwo">
+                        <button class="accordion-button faq_btn px-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          What does Anahit do?
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body faq_body">
+                          <p class="mb-0 text_common text-grey">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item faq_item px-0">
+                      <h2 class="accordion-header faq_header" id="headingThree">
+                        <button class="accordion-button faq_btn px-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          What happens when you subscribe for insights?
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body faq_body">
+                          <p class="mb-0 text-grey text_common">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item faq_item px-0">
+                      <h2 class="accordion-header faq_header" id="headingFour">
+                        <button class="accordion-button faq_btn px-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                          What happens when you subscribe for real-time alerts?
+                        </button>
+                      </h2>
+                      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                        <div class="accordion-body faq_body">
+                          <p class="mb-0 text-grey text_common">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item faq_item px-0">
+                      <h2 class="accordion-header faq_header" id="headingFive">
+                        <button class="accordion-button faq_btn px-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                          Can you get insights and real-time alerts for free?
+                        </button>
+                      </h2>
+                      <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                        <div class="accordion-body faq_body">
+                          <p class="mb-0 text-grey text_common">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item faq_item px-0">
+                      <h2 class="accordion-header faq_header" id="headingSix">
+                        <button class="accordion-button faq_btn px-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                          How can I get in touch with Anahit?
+                        </button>
+                      </h2>
+                      <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                        <div class="accordion-body faq_body">
+                          <p class="mb-0 text-grey text_common">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+        <!-- ======= Values Section ======= -->
+        <section class="build last-section count_section count_bottom py-0 ceo_section">
+    
+          <div class="container-fluid px-0" data-aos="fade-up">
+    
+            <div class="row mx-0">
+    
+              <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="build-box">
+                  <a href="{% url 'price' %}">
+                  <h5><img src="{% static 'img/images/title-Line.png' %}"> Subscribe to free insights</h5>
+                </a>
+                <h3 class="mb-sm-5 mb-2">Unlock free finance insights<span class="dot-bg">.</span></h3>
+                <p class="text_common text-dark desk-hide">Connect with the Anahit support team to get your questions answered.</p>
+                <a href="{% url 'price' %}" class="primary_btn"><span class="mobile_hide">Subscribe to free insights</span><span class="desk-hide">Talk to us</span></a>
+                </div>
+              </div>
+    
+              <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="box pos-rel ceo_sec">
+                  <img src="{% static 'img/images/ceo_pic.png' %}" class="img-fluid grayscale ceo-img" alt="">
+                  <div class="ceo_info">
+                    <div class="ceo_image d-sm-flex align-items-center mb-sm-5 mb-3">
+                      <div class="ceo_imgbx">
+                        <p class="ceo_imgtext">PHOTO</p>
+                      </div>
+                      <div class="">
+                        <h2 class="ceo_name mb-2">John Doe</h2>
+                        <p class="ceo_pos mb-0">CEO at Anahit</p>
+                      </div>
+                    </div>
+                    <p class="ceo_text mb-sm-5 mb-3">We never give up. Сhallenges make us <br/>stronger and more professional. Keep <br />in mind. Beware ;)</p>
+                    <img src="{% static 'img/images/sign.png' %}" class="sign-img">
+                    <img src="{% static 'img/images/icon_quote.png' %}" class="icon_quote">
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+    
+          </div>
+    
+        </section><!-- End Values Section -->
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="video_popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <video controls class="w-100">
+                <source src="{% static 'video/dummy.mp4' %}" type="">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- ======= Footer ======= -->
+      {% include 'includes/footer.html' %}
+      <!-- End Footer -->
+    
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

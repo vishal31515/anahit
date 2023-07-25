@@ -1,0 +1,14 @@
+{% load static %}
+{% if filter_alerts %}
+{% for alert in filter_alerts %}
+<tr>
+  <td>
+    <a href="{% url 'view_alert' alert.slug %}">{{alert.asset_name}}</a>
+  </td>
+    <td>{% for tag in alert.tags.all %}{{tag.name}} {% endfor %}</td>
+    <td>{{alert.asset_class}}</td>
+  </tr>
+{% endfor %}
+{% else %}
+<h1>no data found</h1>
+{% endif %} 

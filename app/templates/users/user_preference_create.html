@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+
+<style>
+    .checkout_wrapper {
+        background: url("{% static 'img/images/lines-bg.png' %}") no-repeat;
+        background-size: contain;
+    }
+    .ps-6 {
+        padding-left: 8rem !important;
+    }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="main-wrap">
+
+    <!-- ======= Left side bar ======= -->
+    {% include "includes/sidebar.html" %}
+    <!-- End Header -->
+
+    <div class="right-bar">
+        <!-- ======= Header ======= -->
+        {% include "includes/header.html" %}
+        <!-- End Header -->
+
+        <!-- ======= Main Content ======= -->
+
+        <div class="checkout_wrapper" style="margin-top: 150px;">
+            <div class="container ps-6">
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="blog-title d-flex align-items-center">
+                            <svg width="50" height="1" viewBox="0 0 60 1" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <line y1="0.5" x2="60" y2="0.5" stroke="#A9AFC3" />
+                            </svg>
+                            <h6 style="color: #A9AFC3" class="text-gray  m-0 ms-2">MY PREFERENCES</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-9 col-md-6">
+                        <h1 class="text-white font-weight-600">MY PREFERENCES <span class="dot-bg">.</span></h1>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-9 col-md-6">
+                        <p class="text-gray">Research stocks and understand mark trends all in one place .</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-9 col-md-6">
+                        <form class="form" method="post" novalidate>
+                            {% csrf_token %}
+                            {{user_preference_form}}
+                            <div class="col-md-5 mx-auto">
+                                <button type="submit" class="getstarted w-100 m-0">SAVE</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+                </div>
+
+                
+
+            </div>
+        </div>
+
+
+        <!-- ======= Footer ======= -->
+        {% include "includes/footer.html" %}
+        <!-- End Footer -->
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block script %}
+
+<script>
+    function showField(field){
+        if (field === "CRYPTO"){
+          $('#id_country').hide();
+      } else {
+          $('#id_country').show();
+      }
+    }
+    $('#id_asset_class').change(function () {
+      var optionSelected = $("option:selected", this);
+      var valueSelected = $(this).val();
+      showField(valueSelected);
+    });
+    var optionSelected = $("#id_asset_class").val();
+    console.log(optionSelected)
+    
+    showField(optionSelected);
+</script>
+
+{% endblock %}

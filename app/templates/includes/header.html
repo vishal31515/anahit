@@ -1,0 +1,52 @@
+{% load static %}
+
+<header id="header" class="header fixed-top">
+    <div class="container-fluid">
+        <div class="inner_header align-items-center justify-content-between">
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+                <img src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+            </a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li class="nav_header_item"><a class="nav-link scrollto {% if request.path == "/about_us" %} active {% endif %}" href="{% url 'about_us' %}">About</a></li>
+                    <li class="nav_header_item"><a class="nav-link scrollto {% if request.path == "/services/" %} active {% endif %}" href="{% url 'services' %}">Services</a></li>
+                    <li class="nav_header_item"><a class="nav-link scrollto {% if request.path == "/price/" %} active {% endif %}" href="{% url 'price' %}">Price</a></li>
+                    <li class="nav_header_item"><a class="nav-link scrollto {% if request.path == "/blog/" %} active {% endif %}" href="{% url 'blog_home' %}">Blog</a></li>
+                    <li class="nav_header_item"><a class="nav-link scrollto {% if request.path == "/contact_us" %} active {% endif %}" href="{% url 'contact_us' %}">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile_action_div">
+                <img src="{% static 'img/images/icon_menu.png' %}" class="mobile-nav-toggle" />
+                <div class="get-action text-end">
+                    {% if request.user.is_authenticated %}
+                    <div class="profile-dropdown dropdown">
+                        <img class="dropdown-toggle profile-dropdown-img" src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}" alt="profile-dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"/>
+                        <div class="dropdown-menu dropdown_user mt-2 p-3" aria-labelledby="dropdownMenuButton1">
+                            <div class="d-flex align-items-center">
+                                <img src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}" class="dropdown-profile-img" />
+                                <div class="ms-3">
+                                    <h5 class="user-name">{{ request.user.email }}</h5>
+                                </div>
+                            </div>
+                            <ul class="user-menu  p-0 mt-4 mb-0">
+                            <li><a class="dropdown-item" href="{% url 'my_account' %}"><img class="hover-hide me-2" src="{% static 'img/images/user_acc.png' %}"/><img class="hover-active me-2" src="{% static 'img/images/user-grdt.png' %}"/>My Account</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user_preference' %}"><img class="hover-hide me-2" src="{% static 'img/images/Preference.png' %}"/><img class="hover-active me-2" src="{% static 'img/images/heart-grdt.png' %}"/>My Preference</a></li>
+                            <li><a class="dropdown-item" href="{% url 'invoice_history' %}"><img class="hover-hide me-2" src="{% static 'img/images/prev-order.png' %}"/><img class="hover-active me-2" src="{% static 'img/images/prev-order-grd.png' %}"/>My Previous Orders</a></li>
+                            <!-- <li><a class="dropdown-item" href="{% url 'account_logout' %}"><img class=" me-2" src="{% static 'img/images/exit.png' %}"/>Log out</a></li> -->
+                            <form action ="{% url 'account_logout' %}" method ="post">
+                                    {% csrf_token %}
+                            <button type="submit" class="dropdown-item"><img class="hover-hide me-2" src="{% static 'img/images/exit.png' %}"/><img class="hover-active me-2" src="{% static 'img/images/logout.png' %}"/>Logout</button>
+                            </form>
+                            </ul>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a class="getstarted scrollto" href="{% url 'account_login' %}">
+                    Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

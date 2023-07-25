@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+<div class="main-wrap">
+    {% include 'includes/sidebar.html' %}
+    
+    <div class="right-bar">
+      <!-- ======= Header ======= -->
+      {% include 'includes/header.html' %}
+     <!-- End Header -->
+    
+      <main id="main">
+        <!-- ======= About Section ======= -->
+        <section class="why-choose cstm_data_driven count_section top_section">
+          <div class="container" data-aos="fade-up">    
+            <div class="">
+                <h5 class="sub_head text-grey"><img class="head_line" src="{%static 'img/images/title-Line.png' %}"> The five pillars behind Anahit’s</h5>
+                <h2 class="primary_head">Data-driven investment <br/>analytics platform<span class="dot-bg">.</span></h2>
+            </div>
+            <div class="row gy-4 align-items-center alter_row">
+                <div class="col-md-6">
+                  <div class="why-right pt-0">
+                      <h4>Macro Analysis</h4>
+                      <p class="p-left ps-0 ms-0">Understand the market’s ability to bear risks by connecting asset prices and economic fluctuations</p>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="why_img ms-auto me-sm-0 me-auto">
+                      <img src="{%static 'img/images/economics_1.png' %}" class="mb-4 light_mode_hide">
+                      <img src="{%static 'img/images/economics_dark.png' %}" class="mb-4 light_mode_show">
+                      <p class="driven_text">Macro <br class="desk-hide" />Analysis</p>
+                  </div>
+                </div>
+    
+            </div>
+            <div class="row gy-4 align-items-center">
+                <div class="col-md-5">
+                  <div class="why_img mx-auto">
+                      <img src="{%static 'img/images/stock_1.png' %}" class="mb-4 light_mode_hide">
+                      <img src="{%static 'img/images/stock_dark.png' %}" class="mb-4 light_mode_show">
+                      <p class="driven_text">Fundamental<br/>Analysis</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="why-right pt-0 ps-sm-5 ps-0 mb-sm-0 mb-4">
+                      <h4>Fundamental Analysis</h4>
+                      <p class="p-left ps-0 ms-0">Measure an asset’s worth by connecting the dots between economy, finance, and industry conditions</p>
+                  </div>
+                </div>
+    
+            </div>
+            <div class="row gy-4 align-items-center alter_row">
+                <div class="col-md-6">
+                  <div class="why-right pt-0">
+                      <h4>Technical Analysis</h4>
+                      <p class="p-left ps-0 ms-0">Identify trading opportunities with done-for-you statistical trend analysis, including trade volume and price movement</p>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="why_img me-sm-0 me-auto ms-sm-0 ms-auto mb-sm-0">
+                      <img src="{%static 'img/images/analysis_1.png' %}" class="mb-4 light_mode_hide">
+                      <img src="{%static 'img/images/analysis_dark.png' %}" class="mb-4 light_mode_show">
+                      <p class="driven_text">Technical <br class="desk-hide" />Analysis</p>
+                  </div>
+                </div>
+    
+            </div>
+            <div class="row gy-4 align-items-center">
+                <div class="col-md-5">
+                  <div class="why_img mx-auto">
+                      <img src="{%static 'img/images/stock_1.png' %}" class="mb-4 light_mode_hide">
+                      <img src="{%static 'img/images/stock_dark.png' %}" class="mb-4 light_mode_show">
+                      <p class="driven_text">Social Sentiment<br />Analysis</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="why-right pt-0 ps-sm-5 ps-0 mb-sm-0 mb-4">
+                      <h4>Social Sentiment Analysis</h4>
+                      <p class="p-left ps-0 ms-0">Get an accurate understanding of investment conversations around you with natural language processing (NLP)</p>
+                  </div>
+                </div>
+    
+            </div>
+            <div class="row gy-4 align-items-center alter_row">
+                <div class="col-md-6">
+                  <div class="why-right pt-0">
+                      <h4>News Analysis</h4>
+                      <p class="p-left ps-0 ms-0">Draw investment conclusions from facts, perszpectives, and analyses from news stories on the go</p>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="why_img me-sm-0 me-auto mb-sm-0 ms-auto">
+                      <img src="{%static 'img/images/searching_1.png' %}" class="mb-4 light_mode_hide">
+                      <img src="{%static 'img/images/searching_dark.png' %}" class="mb-4 light_mode_show">
+                      <p class="driven_text">News Analysis</p>
+                  </div>
+                </div>
+            </div>
+            {% if not request.user.is_authenticated %}
+            <div class="why_sec mt-2">
+              <div class="text-center"><a href="{% url 'account_login' %}" class="text-uppercase primary_btn">Yes, I want in!</a></div>
+            </div>
+            {% endif %}
+    
+          </div>
+
+          <div class="ins about_pattern">
+              <div class="c1"></div>
+              <div class="c2"></div>
+              <div class="c3"></div>
+              <div class="c4"></div>
+              <div class="c5"></div>
+              <div class="c6"></div>
+              <div class="c7"></div>
+          </div>
+        </section><!-- End Counts Section -->
+    
+        <!-- ======= Values Section ======= -->
+        <section class="build_sec count_section pt-0">
+    
+          <div class="container-fluid px-0" data-aos="fade-up">
+    
+            <div class="row mx-0">
+    
+              <div class="col-lg-6 mt-4 px-lg-0 mt-lg-0 flex-column justify-content-center px-sm-3 px-0" data-aos="fade-up" data-aos-delay="400">
+                <div class="box h-100">
+                  <img src="{% static 'img/images/team_profs.png' %}" class="img-fluid grayscale w-100 h-100 object-cover" alt="">
+                </div>
+              </div>
+    
+              <div class="col-lg-6 px-lg-0 flex-column justify-content-center px-sm-3 px-0" data-aos="fade-up" data-aos-delay="200">
+                <div class="build-sec-box">
+                  <h5 class="sub_head"><img src="{% static 'img/images/title-Line.png' %}" class="head_line"> Build a secure future with</h5>
+                <h3 class="primary_head text-dark">Algorithm-led finance insights<span class="dot-bg">.</span></h3>
+                <p class="finance_text">Make informed investment decisions with <br/>data-driven insights. </p>
+                <p class="text_common">Investors often make investment decisions based on intuition, not facts. They miss investment opportunities and can’t build a secure financial portfolio. That’s why we’ve built Anahit to help you make faster and accurate investment decisions. Our platform leverages a combination of artificial intelligence, machine learning, natural language processing, and data analytics to generate timely insights for you. You’re in safe hands with Anahit because it’s driven by data, not opinions or trial and error.</p>
+                </div>
+              </div>
+    
+            </div>
+    
+          </div>
+    
+        </section><!-- End Values Section -->
+    
+    
+        <!-- ======= Testimonials Section ======= -->
+        <section class="good-company testimonials team_sec count_section">
+    
+          <div class="container" data-aos="fade-up">
+    
+            <header class="">
+              <h5 class="sub_head text-grey"><img class="head_line" src="{%static 'img/images/title-Line.png' %}"> You’re the center of our universe</h5>
+              <h2 class="primary_head">A team with 30+ years <br class="mobile_hide" />of combined experience<span class="dot-bg">.</span></h2>
+              <div class="row">
+              <div class="col-lg-9 px-sm-3 px-0">
+              <p class="text_common text-grey mt-0">We always try to implement our creative ideas at the highest level.<br> You can see it by looking at our portfolio.</p>
+              </div>
+              <div class="col-lg-3">
+              <!-- <ul class="pagination-testi">
+                <li><a href="javascript:void(0)" class="prev_testi">PREV</a></li>
+                <li class="active"><a href="javascript:void(0)" class="next_testi">NEXT</a></li>
+              </ul> -->
+              </div>
+              </div>
+            </header>
+    
+          </div>
+    
+        </section><!-- End Testimonials Section -->
+    
+        <!-- ======= Testimonials Section ======= -->
+        <section class="good-company-bottom testimonials team_slider_sec">
+    
+          <div class="container-fluid px-sm-3 px-0" data-aos="fade-up">
+            <div  data-aos="fade-up" data-aos-delay="200">
+              <div class="testimonials-slider team_slider">
+                <div class="swiper-wrapper">
+      
+      
+                    <div class="team_member_bx">
+                      <img class="member_img" src="{%static 'img/images/member_1.png' %}">
+                      <div class="member_details">
+                        <h3 class="member_name">Dylan Lake</h3>
+                        <p class="member_profession">Investment Professional</p>
+                        <a href="#" class="read_member"><i class="fas fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+      
+      
+      
+                    <div class="team_member_bx">
+                      <img class="member_img" src="{%static 'img/images/member_2.png' %}">
+                      <div class="member_details">
+                        <h3 class="member_name">Dylan Lake</h3>
+                        <p class="member_profession">Investment Professional</p>
+                        <a href="#" class="read_member"><i class="fas fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+      
+      
+      
+                    <div class="team_member_bx">
+                      <img class="member_img" src="{%static 'img/images/member_3.png' %}">
+                      <div class="member_details">
+                        <h3 class="member_name">Dylan Lake</h3>
+                        <p class="member_profession">Investment Professional</p>
+                        <a href="#" class="read_member"><i class="fas fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+      
+      
+      
+                    <div class="team_member_bx">
+                      <img class="member_img" src="{%static 'img/images/member_4.png' %}">
+                      <div class="member_details">
+                        <h3 class="member_name">Dylan Lake</h3>
+                        <p class="member_profession">Investment Professional</p>
+                        <a href="#" class="read_member"><i class="fas fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+
+
+
+                    <div class="team_member_bx">
+                      <img class="member_img" src="{%static 'img/images/member_1.png' %}">
+                      <div class="member_details">
+                        <h3 class="member_name">Dylan Lake</h3>
+                        <p class="member_profession">Investment Professional</p>
+                        <a href="#" class="read_member"><i class="fas fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+      
+      
+      
+                    <div class="team_member_bx">
+                      <img class="member_img" src="{%static 'img/images/member_2.png' %}">
+                      <div class="member_details">
+                        <h3 class="member_name">Dylan Lake</h3>
+                        <p class="member_profession">Investment Professional</p>
+                        <a href="#" class="read_member"><i class="fas fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+      
+      
+      
+                    <div class="team_member_bx">
+                      <img class="member_img" src="{%static 'img/images/member_3.png' %}">
+                      <div class="member_details">
+                        <h3 class="member_name">Dylan Lake</h3>
+                        <p class="member_profession">Investment Professional</p>
+                        <a href="#" class="read_member"><i class="fas fa-arrow-right"></i></a>
+                      </div>  
+                    </div>
+      
+      
+                </div>
+      
+              </div>
+
+            </div>
+    
+          </div>
+    
+        </section><!-- End Testimonials Section -->
+        <!-- Brand Section -->
+        <section class="brand-sec">
+          <div class="container" data-aos="fade-up">
+            <div class="brand-inner">
+              <div class="mobile_hide">
+                <div class="row align-items-center">
+                  <div class="col-md-2">
+                    <div class="">
+                      <img src="{% static 'img/images/brand_1.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_2.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_3.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_4.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-center">
+                      <img src="{% static 'img/images/brand_5.png' %}" class="brand_img">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="desk-hide">
+                <div class="brand_slider">
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_1.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_2.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_3.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_4.png' %}" class="brand_img">
+                    </div>
+                    <div class="px-3 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'img/images/brand_5.png' %}" class="brand_img">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Brand Section end -->
+
+        <!-- Video Section -->
+        <section class="video-sec">
+          <div class="container" data-aos="fade-up">
+            <div class="video-inner">
+              <button class="play_btn" data-bs-toggle="modal" data-bs-target="#video_popup">
+                <img src="{% static 'img/images/btn_play.png' %}">
+              </button>
+          </div>
+        </section>
+        <!-- Video Section End -->
+    
+        <!-- ======= Values Section ======= -->
+        <section class="build last-section count_section pt-0">
+    
+          <div class="container-fluid px-0" data-aos="fade-up">
+    
+            <div class="row mx-0">
+    
+              <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="build-box">
+                  <h5><img src="{%static 'img/images/title-Line.png' %}"> Try the future of financial investment</h5>
+                <h3>Join 35,891 investors creating a secure future with Anahit<span class="dot-bg">.</span></h3>
+                <h6><a href="{% url 'account_signup' %}">Sign me up</a></h6>
+                </div>
+              </div>
+    
+              <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="box pos-rel ceo_sec">
+                  <img src="{%static 'img/images/ceo_pic.png' %}" class="img-fluid grayscale ceo-img" alt="">
+                  <div class="ceo_info">
+                    <div class="ceo_image d-sm-flex align-items-center mb-sm-5 mb-3">
+                      <div class="ceo_imgbx">
+                        <p class="ceo_imgtext">PHOTO</p>
+                      </div>
+                      <div class="">
+                        <h2 class="ceo_name mb-2">John Doe</h2>
+                        <p class="ceo_pos mb-0">CEO at Anahit</p>
+                      </div>
+                    </div>
+                    <p class="ceo_text mb-sm-5 mb-3">We never give up. Сhallenges make us <br/>stronger and more professional. Keep <br />in mind. Beware ;)</p>
+                    <img src="{% static 'img/images/sign.png' %}" class="sign-img">
+                    <img src="{% static 'img/images/icon_quote.png' %}" class="icon_quote">
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+    
+          </div>
+    
+        </section><!-- End Values Section -->
+    
+    
+      </main><!-- End #main -->
+      <!-- Modal -->
+      <div class="modal fade" id="video_popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <video controls class="w-100">
+                <source src="{% static 'video/dummy.mp4' %}" type="">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- ======= Footer ======= -->
+      {% include 'includes/footer.html' %}
+      <!-- End Footer -->
+    
+      </div>
+    </div>
+    
+
+{% endblock %}

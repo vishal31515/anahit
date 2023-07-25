@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+
+  <div class="right-bar">
+    <!-- ======= Header ======= -->
+    {% include 'includes/header.html' %}
+    <!-- End Header -->
+
+    <main id="main">
+      <!-- ======= About Section ======= -->
+      <section class="count_section top_section count_md_bottom">
+        <div class="container" data-aos="fade-up">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="contact_left">
+                <h5 class="sub_head text-grey desk-hide"><img src="{%static 'img/images/title-Line.png' %}"> Contact US
+                </h5>
+                <h2 class="primary_head desk-hide">Send a message<span class="dot-bg">.</span></h2>
+                <p class="text_common text-grey mb-5 desk-hide">Sometimes you need a little help. And, that’s okay.
+                  We’re here for you.</p>
+                <div class="contact_card">
+                  <div class="me-4">
+                    <img src="{% static 'img/images/icon_globe.png' %}" class="light_mode_hide">
+                    <img src="{% static 'img/images/globe_dark.png' %}" class="light_mode_show">
+                  </div>
+                  <div class="contact_card_info">
+                    <h3 class="contact_card_head">Address:</h3>
+                    <p class="mb-0 contact_card_details">27 Division St, New York, NY 10002, USA</p>
+                  </div>
+                </div>
+                <div class="contact_card mb-0">
+                  <div class="me-4">
+                    <img src="{% static 'img/images/icon_chat.png' %}" class="light_mode_hide">
+                    <img src="{% static 'img/images/chat_dark.png' %}" class="light_mode_show">
+                  </div>
+                  <div class="contact_card_info">
+                    <h3 class="contact_card_head">Hit us up:</h3>
+                    <p class="mb-0 contact_card_details">info@sitename.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-7">
+              <div class="">
+                <h5 class="sub_head text-grey mobile_hide"><img src="{%static 'img/images/title-Line.png' %}"> Contact
+                  US</h5>
+                <h2 class="primary_head mobile_hide">Send a message<span class="dot-bg">.</span></h2>
+                <p class="text_common text-grey mb-5 mobile_hide">Sometimes you need a little help. And, that’s okay.
+                  We’re here for you.</p>
+                <form method="post" id="contact_us">
+                  {% csrf_token %}
+                  {% if empty_fields %}
+                  <script type="text/javascript">alert('All fields are mandetory')
+                  </script>
+                  {% endif %}
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12 pe-sm-5 ps-sm-3 px-0">
+                      <div class="mb-md-5 mb-4" id="fullname_error">
+                        <input class="leave-form" type="text" id="full_name" name="full_name" placeholder="Name" autocomplete="off">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 pe-sm-5 ps-sm-3 px-0">
+                      <div class="mb-md-5 mb-4" id="email_error">
+                        <input class="leave-form" type="email" id="email_address" name="email_address"
+                          placeholder="Email" autocomplete="off" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 pe-sm-5 ps-sm-3 px-0" id="number_error">
+                      <div class="mb-md-5 mb-4">
+
+                        <input class="leave-form" type="text" id="phone_number" name="phone_number" placeholder="Phone"
+                          maxlength="10" autocomplete="off">
+                        <p id="show"></p>
+
+
+                      </div>
+
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-sm-12 pe-sm-5 ps-sm-3 px-0">
+                      <div class="" id="message_error">
+                        <textarea class="leave-form" rows="5" id="message" name="message"
+                          placeholder="Message"></textarea>
+                      </div>
+                    </div>
+                    <button class="contact_btn d-inline-block mt-5 mb-sm-0 mb-5 color-w checkNumber">Send
+                      Message</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section><!-- End Counts Section -->
+
+      <section class="map_contact count_section count_md_bottom">
+        <div class="container">
+          <div class="inner_map">
+            <img src="{% static 'img/images/contact_map.png' %}" class="w-100">
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= Values Section ======= -->
+      <section class="build last-section count_section count_md_bottom pt-0 ceo_section">
+
+        <div class="container-fluid px-0" data-aos="fade-up">
+
+          <div class="row mx-0">
+
+            <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <div class="build-box">
+                <a href="{% url 'price' %}">
+                  <h5><img src="{% static 'img/images/title-Line.png' %}"> Subscribe to free insights</h5>
+                </a>
+                <h3 class="mb-sm-5 mb-2">Unlock free finance insights<span class="dot-bg">.</span></h3>
+                <p class="text_common text-dark desk-hide">Connect with the Anahit support team to get your questions
+                  answered.</p>
+                <a href="{% url 'price' %}" class="primary_btn ceo_sub_btn"><span class="mobile_hide">Subscribe to free
+                    insights</span><span class="desk-hide">Talk to us</span></a>
+              </div>
+            </div>
+
+            <div class="col-lg-6 flex-column justify-content-center" data-aos="fade-up" data-aos-delay="400">
+              <div class="box pos-rel ceo_sec">
+                <img src="{%static 'img/images/ceo_pic.png' %}" class="img-fluid grayscale ceo-img" alt="">
+                <div class="ceo_info">
+                  <div class="ceo_image d-sm-flex align-items-center mb-sm-5 mb-3">
+                    <div class="ceo_imgbx">
+                      <p class="ceo_imgtext">PHOTO</p>
+                    </div>
+                    <div class="">
+                      <h2 class="ceo_name mb-2">John Doe</h2>
+                      <p class="ceo_pos mb-0">CEO at Anahit</p>
+                    </div>
+                  </div>
+                  <p class="ceo_text mb-sm-5 mb-3">We never give up. Сhallenges make us <br />stronger and more
+                    professional. Keep <br />in mind. Beware ;)</p>
+                  <img src="{% static 'img/images/sign.png' %}" class="sign-img">
+                  <img src="{% static 'img/images/icon_quote.png' %}" class="icon_quote">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section><!-- End Values Section -->
+
+
+    </main><!-- End #main -->
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+
+
+
+    <!-- ======= Footer ======= -->
+    {% include 'includes/footer.html' %}
+    <!-- End Footer -->
+
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+  $(document).ready(function () {
+    $('#contact_us').on("submit", function () {
+
+      var full_name = $("#full_name").val();
+      var email_address = $("#email_address").val();
+      var message = $("#message").val();
+      
+      var validationError = false;
+      var paras = document.getElementsByClassName('errors');
+      while (paras[0])
+        paras[0].parentNode.removeChild(paras[0]);
+      if (full_name == '' || full_name == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter full name";
+        document.getElementById('fullname_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (email_address == '' || email_address == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter email";
+        document.getElementById('email_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (message == '' || message == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter a message";
+        document.getElementById('message_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      
+    })
+    var message_timeout = document.getElementById("django_message");
+    setTimeout(function () {
+      message_timeout.style.display = "none";
+    }, 5000);
+  });
+
+</script>
+
+{% endblock script %}

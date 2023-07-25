@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="main_wrapper">
+  <div class="right_bar d-flex justify-content-center py-4">
+    <div>
+      <a href="{% url 'home' %}" class=" ">
+        <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+        <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)" />
+          <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FCB854" />
+              <stop offset="0.479066" stop-color="#D96534" />
+              <stop offset="0.817115" stop-color="#DC4E4F" />
+              <stop offset="1" stop-color="#DD425D" />
+            </linearGradient>
+            <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FCB854" />
+              <stop offset="0.479066" stop-color="#D96534" />
+              <stop offset="0.817115" stop-color="#DC4E4F" />
+              <stop offset="1" stop-color="#DD425D" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="">
+    <div class="pt-3 px-md-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex align-items-center justify-content-center">
+
+              <div class=" mx-auto">
+                <a href="{% url 'home' %}" class="">
+                  <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login_page_wrapper invoice_page my-account-wrap count_section top_section text-grey py-3">
+    <div class="container">
+      <div class="login_wrapper">
+        <div class="pricing-headings mb-5 d-flex justify-content-between">
+          <div class=""></div>
+          <div class="profile-dropdown dropdown">
+            <img class="dropdown-toggle profile-dropdown-img"
+              src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}"
+              alt="profile-dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" />
+            <div class="dropdown-menu dropdown_user mt-2 p-3" aria-labelledby="dropdownMenuButton1">
+              <div class="d-flex align-items-center">
+                <img
+                  src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}"
+                  class="dropdown-profile-img" />
+                <div class="ms-3">
+                  <h5 class="user-name">{{ request.user.email }}</h5>
+                </div>
+              </div>
+              <ul class="user-menu  p-0 mt-4 mb-0">
+                <li><a class="dropdown-item" href="{% url 'my_account' %}"><img class="hover-hide me-2"
+                      src="{% static 'img/images/user_acc.png' %}" /><img class="hover-active me-2"
+                      src="{% static 'img/images/user-grdt.png' %}" />My Account</a></li>
+                <li><a class="dropdown-item" href="{% url 'user_preference' %}"><img class="hover-hide me-2"
+                      src="{% static 'img/images/Preference.png' %}" /><img class="hover-active me-2"
+                      src="{% static 'img/images/heart-grdt.png' %}" />My Preference</a></li>
+                <li><a class="dropdown-item" href="{% url 'invoice_history' %}"><img class="hover-hide me-2"
+                      src="{% static 'img/images/prev-order.png' %}" /><img class="hover-active me-2"
+                      src="{% static 'img/images/prev-order-grd.png' %}" />My Previous Orders</a></li>
+                <!-- <li><a class="dropdown-item" href="{% url 'account_logout' %}"><img class=" me-2" src="{% static 'img/images/exit.png' %}"/>Log out</a></li> -->
+                <form action="{% url 'account_logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item"><img class="hover-hide me-2"
+                      src="{% static 'img/images/exit.png' %}" /><img class="hover-active me-2"
+                      src="{% static 'img/images/logout.png' %}" />Logout</button>
+                </form>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="pricing-headings">
+          <h2 class="primary_head">My Previous Orders<span class="dot-bg">.</span></h2>
+          <p class="p-left ps-0 ms-0 text-grey mb-70">Review your billing history and manage your invoices.</p>
+        </div>
+        <h3 id="email-message"> </h3>
+        <div class="search_bar blog_search_bar mb-108">
+          <!-- <form method="GET">
+          <input autocomplete="off" type="text" id="search-input" class="search_input"
+            placeholder="SEARCH BY INVOICE NUMBER" name="search_invoice">
+          <button type="submit" class="search_btn"><img src="/static/img/images/search_icon.png"></button>
+          </form> -->
+        </div>
+        {% if data_list %}
+        <div class="table-responsive">
+          <table class="table invoice_table">
+            <thead>
+              <th>Invoice Number</th>
+              <th>Plans</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              {% for data in data_list %}
+              {% if data.number %}
+              <tr>
+                <td>{{data.number}}</td>
+                <td>{{data.plan_name}}</td>
+                <td>{{data.date}}</td>
+                <td>${{data.amount_paid}}</td>
+                <td class="action-btn">
+                  <a href="{{data.view_invoice}}" target="_blank"><img src="{% static 'img/images/view_icon.png' %}" class="me-4 light_mode_hide" /><img src="{% static 'img/images/eye_dark.png' %}" class="me-4 light_mode_show" /></a>
+                  <a href="{{data.pdf}}"><img src="{% static 'img/images/download_icon.png' %}" class="me-4 light_mode_hide" /><img src="{% static 'img/images/download_dark.png' %}" class="me-4 light_mode_show" /></a>
+                  <form id='invoice_send'>
+                    <input type="hidden" id="file_name" name="file_name" value="{{data.id}}">
+                    <input type="hidden" id="pdf_data" name="pdf_data" value="{{data.pdf}}">
+                    <button type="submit" class="send-invoice">
+                      <img src="{% static 'img/images/email_icon.png' %}" class="light_mode_hide" />
+                      <img src="{% static 'img/images/email_dark.png' %}" class="light_mode_show" />
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+          <h3>No record found.</h3>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% include 'includes/footer.html' %}
+</div>
+<!-- End Footer -->
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+  /*
+      On submiting the form, send the POST ajax
+      request to server and after successfull submission
+      display the object.
+  */
+
+
+  $('.send-invoice').on('click', function(){
+    setTimeout(function() {
+     
+      $('#email-message').text('Invoice sent, please check your email.');
+    },2000
+    );
+    setTimeout(function() {
+     location.reload();
+
+   },4000
+   );
+  })
+  $(document).ready(function(){
+  $(".send-invoice").on('click', function (e) {
+    e.preventDefault();
+    var file_name = $('#file_name').val()
+    var pdf_data = $('#pdf_data').val()
+    $.ajax({
+      type: 'GET',
+      url: "{% url 'send_invoice_pdf' %}",
+      data: {'file_name':file_name, 'pdf_data':pdf_data},
+          success: function (response) {
+            console.log(response)
+          },
+          error: function (response) {
+              // alert the error if any error occured
+              console.log(response["responseJSON"]["error"]);
+          }
+      })
+  })
+})
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  .ps-6 {
+    padding-left: 8rem !important;
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+
+  <div class="right-bar">
+    <!-- ======= Header ======= -->
+    {% include 'includes/header.html' %}
+    <!-- End Header -->
+
+    <div>
+      <section class="our_service_section top_section">
+        <div class="container">
+          <div class="pricing-headings mb-5">
+            <h5 class="sub_head text-grey mb-4"><img src="{% static 'img/images/title-Line.png' %}"
+                class="head_line">our services</h5>
+            <h2 class="primary_head mb-3">Real-Time Alerts<span class="dot-bg">.</span></h2>
+            <p class="p-left ps-0 ms-0 text-grey">Research stocks and understand market trends all in one place</p>
+          </div>
+          <!-- end heading section -->
+
+          <!-- start our service tabs -->
+          <div class="our-service-tabs mb-5">
+            <div class="d-md-flex justify-content-between mb-5">
+              <div class="search_bar">
+                <input type="text" id="search-input" name="" class="search_input"
+                  placeholder="Search Real-time Alerts...">
+                <button class="search_btn"><img src="{% static '/img/images/search_icon.png' %}"></button>
+              </div>
+              <ul class="nav nav-pills mb-3 align-items-center justify-content-end mt-md-0 mt-5" id="pills-tab"
+                role="tablist">
+                <li class="nav-item me-5" role="presentation">
+                  <button class="nav-link active switch_tab" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">
+                    <img src="{% static 'img/images/cards_icon.png' %}" class="not-active">
+                    <img src="{% static 'img/images/active_cards.png' %}" class="active_img">
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link switch_tab" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="true">
+                    <img src="{% static 'img/images/list_icon.png' %}" class="not-active">
+                    <img src="{% static 'img/images/active_list.png' %}" class="active_img">
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="ins about_pattern mobile_hide">
+                  <div class="c1"></div>
+                  <div class="c2"></div>
+                  <div class="c3"></div>
+                  <div class="c4"></div>
+                  <div class="c5"></div>
+                  <div class="c6"></div>
+                  <div class="c7"></div>
+                </div>
+                <div class="table-responsive service-table">
+                  <table class="table ">
+                    <thead>
+                      <tr class="thead_row">
+                        <th class="table_head" scope="col">Name</th>
+                        <th class="table_head" scope="col">Tags</th>
+                        <th class="table_head" scope="col">Category</th>
+                      </tr>
+                    </thead>
+                    <tbody class="service-table-body" id="service-content-table-section">
+                      {% if alerts %}
+                      {% for alert in alerts_list %}
+                      <tr>
+                        <td><a href="{% url 'view_alert' alert.slug %}">{{alert.asset_class}}</a></td>
+                        <td>
+                          {% for tag in alert.tags.all %}
+                          {{tag.name}}
+                          {% endfor %}
+                        </td>
+                        <td>{{alert.channel}}</td>
+                      </tr>
+                      {% endfor %}
+                      {% endif %}
+                    </tbody>
+                  </table>
+                  <button class="primary_btn subscribe_btn desk-hide border-0">View More</button>
+                </div>
+              </div>
+              <div class="tab-pane show active fade" id="pills-profile" role="tabpanel"
+                aria-labelledby="pills-profile-tab">
+                <div class="ins about_pattern post_sec_pattrn mobile_hide">
+                  <div class="c1"></div>
+                  <div class="c2"></div>
+                  <div class="c3"></div>
+                  <div class="c4"></div>
+                  <div class="c5"></div>
+                  <div class="c6"></div>
+                  <div class="c7"></div>
+                </div>
+                <div class="pos-rel">
+                  <div class="row" id="service-content-grid-section">
+                    {% if alerts %}
+                    {% for alert in alerts %}
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                      <a href="{% url 'view_alert' alert.slug %}">
+                        <div class="service-cards post-right mt-5">
+                          <img class="service-cards-img"
+                            src="{% if alert.thumbnail %}{{alert.thumbnail.url}}{% else %}{% static '/img/images/post_img1.png' %}{% endif %}">
+                          <div class="our-service-buttons">
+                            {% for tag in alert.tags.all %}
+                            <button class="button-ist-servive" type="button">{{tag.name}}</button>
+                            {% endfor %}
+                          </div>
+                          <div class="content-right big service_card_overlay">
+                            <h6>
+                              {% for tag in alert.tags.all %}
+                              <span class="cate_badge">{{tag.name}}</span>
+                              {% endfor %}
+                              <span class="blog_publish">{{alert.created_at}}</span>
+                            </h6>
+                            <h3 class="text_dotted post_right_content color-w">{{alert.message}}</h3>
+                          </div>
+                        </div>
+                      </a> 
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                  <button class="primary_btn subscribe_btn desk-hide border-0">View More</button>
+                </div>
+                <div id="bottom-sentinel">
+                  <div class="loader" style="display:none;"></div>
+                </div>
+              </div>
+              <!-- end our service tabs -->
+              <!-- end service cards section -->
+            </div>
+          </section>
+          <!-- end our service section -->
+        </div>
+        <!-- ======= Footer ======= -->
+        {% include 'includes/footer.html' %}
+        <!-- End Footer -->
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/infinite.js' %}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    let bottomSentinel = document.querySelector("#bottom-sentinel");
+    let scrollElement = document.querySelector("#service-content-grid-section");
+    let baseUrl = "{% url 'real-time-alerts' %}"
+    attachInfiniteScroll(bottomSentinel, scrollElement, baseUrl);
+  })
+</script>
+
+<script>
+  loadAvailableAlerts = (url, searchID, divID) => {
+    jQuery.ajax({
+      url: url,
+      data: {
+        'search_id': searchID
+      },
+      success: function (data) {
+        jQuery("#" + divID).html(data);
+        
+
+      }
+    });
+  }
+  jQuery("#search-input").on('keyup', function () {
+    searchID = jQuery('#search-input').val()
+    $("#bottom-sentinel").remove();
+    url = "{% url 'real-time-alerts-grid-search' %}"
+    loadAvailableAlerts(url, searchID, 'service-content-grid-section')
+  });
+
+  jQuery("#search-input").on('click', function () {
+    searchID = jQuery('#search-input').val()
+    url = "{% url 'real-time-alerts-list-search' %}"
+    loadAvailableAlerts(url, searchID, 'service-content-table-section')
+  });
+
+</script>
+
+{% endblock %}

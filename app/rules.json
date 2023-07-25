@@ -1,0 +1,18 @@
+{
+    "FIN-ALERT": {
+      "CRYPTO": 1,
+      "STOCK": 3,
+      "CHANNEL": [
+        "EMAIL"
+      ]
+    },
+    "FIN-SIGHT": {
+      "CAN-SAVE": true,
+      "DASHBOARD": [
+        "scanner",
+        "other1",
+        "other1"
+      ],
+      "CAN-DOWNLOAD": false
+    }
+  }

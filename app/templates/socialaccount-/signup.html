@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+
+
+{% block content %}
+<div class="main_wrapper">
+    <div class="right_bar d-flex justify-content-center py-4">
+        <a id="previous_page" href="{% url 'account_login' %}" class="">
+            <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+            <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)"/>
+                <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round"/>
+                <defs>
+                <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FCB854"/>
+                <stop offset="0.479066" stop-color="#D96534"/>
+                <stop offset="0.817115" stop-color="#DC4E4F"/>
+                <stop offset="1" stop-color="#DD425D"/>
+                </linearGradient>
+                <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FCB854"/>
+                <stop offset="0.479066" stop-color="#D96534"/>
+                <stop offset="0.817115" stop-color="#DC4E4F"/>
+                <stop offset="1" stop-color="#DD425D"/>
+                </linearGradient>
+                </defs>
+                </svg>             
+        </a>
+      </div>
+    <div class="">
+        <div class="pt-3 px-md-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center justify-content-center">
+
+                            <div class=" mx-auto">
+                                <a href="{% url 'home' %}" class="">
+
+                                    <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="login_page_wrapper py-3 ">
+            <div class="container">
+            	<div class="text-center">
+                    {% if account.get_provider.name == 'Facebook' %}
+                    <h1>{% trans "Sign Up" %}</h1>
+                    
+                    <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+                    {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+                    <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+                        {% csrf_token %}
+                      {{ form.as_p }}
+                      {% if redirect_field_value %}
+                      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                      {% endif %}
+                      <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+                    </form>
+                    {% else %}
+                    <h4 class="primary_head small_head">You have already registerd with this email.</h4>
+                    <p class="text_common text_white"><a class="click_link" href="{% url 'account_login' %}">click here</a> <span>to login.</p>
+                    {% endif %}
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

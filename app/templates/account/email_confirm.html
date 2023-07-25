@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+
+
+{% block content %}
+    <div class="">
+	    <div class="pt-3 px-md-5">
+	        <div class="container-fluid">
+	        	<div class="row">
+	                <div class="col-md-12">
+	                    <div class="d-flex align-items-center justify-content-center">
+	                        <div class=" mx-auto">
+                                <a href="{% url 'home' %}" class="">
+
+                                    <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                                </a>
+                            </div>
+	                    </div>
+	                </div>
+	            </div>
+			</div>
+		</div>
+		<div class="login_page_wrapper py-3">
+			<div class="container">
+				<div class="text-center">
+					<h1 class="primary_head mb-3">{% trans "Confirm E-mail Address" %}</h1>
+
+					{% if confirmation %}
+
+					{% user_display confirmation.email_address.user as user_display %}
+
+					<p class="text_common text-grey mb-5">{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}" class="grdnt-color">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+
+					<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+					{% csrf_token %}
+					    <button type="submit" class="post_comment_btn py-1">{% trans 'Confirm' %}</button>
+					</form>
+					{% else %}
+
+					{% url 'account_email' as email_url %}
+
+					<p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endif %}
+
+{% endblock %}

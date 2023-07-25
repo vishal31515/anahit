@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: anahit
+    build: ./app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+    # new addition below for debuging
+    stdin_open: true
+    tty: true
+
+  db:
+    container_name: anahit_db
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=adminuser
+      - POSTGRES_PASSWORD=adminpass
+      - POSTGRES_DB=anahit_dev
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailservice
+    ports:
+      - "8025:8025"
+    logging:
+      driver: none    
+
+volumes:
+  postgres_data:

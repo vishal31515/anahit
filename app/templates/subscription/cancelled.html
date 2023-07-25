@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  .ps-6{
+     padding-left: 8rem !important; 
+  }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+    
+    <div class="right-bar">
+      <!-- ======= Header ======= -->
+      {% include 'includes/header.html' %}
+      <!-- End Header -->
+    
+      <div>
+      </div>
+    
+      <!-- ======= Footer ======= -->
+      {% include 'includes/footer.html' %}
+      <!-- End Footer -->
+    
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

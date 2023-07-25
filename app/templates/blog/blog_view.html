@@ -1,0 +1,433 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  .ps-6{
+     padding-left: 8rem !important; 
+  }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+    
+    <div class="right-bar">
+      <!-- ======= Header ======= -->
+      {% include 'includes/header.html' %}
+      <!-- End Header -->
+      
+      <!-- start blog section -->
+        <section class="top_section count_section post_single">
+          {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li id="warningMessage"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+          <script type="text/javascript">window.setTimeout("document.getElementById('warningMessage').style.display='none';", 5000); </script>
+
+          <div class="d-flex justify-content-end mobile_hide mb-5">
+            <div class="">
+              <h5 class="sub_head text-grey"><img class="head_line" src="{% static 'img/images/title-Line.png' %}"> Blog</h5>
+            </div>
+            <!-- <div class="">
+              <h5 class="sub_head text-grey"><img class="head_line" src="{% static 'img/images/title-Line.png' %}"> Post</h5>
+            </div> -->
+          </div>
+          <div class="ins about_pattern post_sec_pattrn mobile_hide">
+              <div class="c1"></div>
+              <div class="c2"></div>
+              <div class="c3"></div>
+              <div class="c4"></div>
+              <div class="c5"></div>
+              <div class="c6"></div>
+              <div class="c7"></div>
+          </div>
+
+          <div class="ins about_pattern mobile_hide">
+              <div class="c1"></div>
+              <div class="c2"></div>
+              <div class="c3"></div>
+              <div class="c4"></div>
+              <div class="c5"></div>
+              <div class="c6"></div>
+              <div class="c7"></div>
+          </div>
+          <div class="container">
+            <h5 class="sub_head text-grey mb-4"><img class="head_line" src="{% static 'img/images/title-Line.png' %}"> BLOG</h5>
+                  <h2 class="primary_head">{{blog.title}}<span class="dot-bg">.</span></h2>
+            <div class="row">
+              <div class="col-lg-8 col-md-12 col-sm-12">
+              <!-- start image section -->
+                <div class="post-part-ist">
+                  <img class="w-100" src="{% if blog.thumbnail %}{{blog.thumbnail.url}} {% else %} {% static 'img/images/gradientoverlay.png' %} {% endif %}">
+                  <h4 class="blog-img-heading">{{blog.subtitle}}</h4>
+                  <div class="blog-description">
+                    {{blog.body|safe}}
+                  </div>
+                </div>
+               
+                <!-- <p class="text_common text-grey mb-5 mt-5">{{blog.body|safe}}</p> -->
+
+            <!-- start blog share section -->
+                <div class="share-section">
+                  <div class="share mb-5 mt-5">
+                    <div class="share-icons d-flex ">
+                      <div class="share_options">
+                        <button class="share-btn"><img class="share-icon me-3" src="{% static 'img/images/share_icon.png' %}">SHARE</button>
+                        <ul class="social_share_listing">
+                          {% load social_share %}
+                          {% post_to_facebook object_or_url '<li class="social_share"><button class="social_share_btn"><i class="fab fa-facebook-f facebook"></i></i></button></li>' %}
+                          {% post_to_twitter text_to_post object_or_url '<li class="social_share"><button class="social_share_btn"><i class="fab fa-twitter twitter"></i></button></li>' %}
+                          <li class="social_share"><button class="social_share_btn" onclick="myFunction()"><i class="fas fa-link copylink"></i></button></li>
+                        </ul>
+                      </div>
+                  </div>
+                    <ul class="tags_list">
+                      {% for tag in blog.tags.all %}
+                      <li class="tag_item my-2"><a href="{% url 'blog_home' %}?tags={{tag}}">{{tag}}</a></li>
+                      {% endfor %}
+                      <!-- <li class="tag_item my-2"><a href="http://192.168.0.142:8000/about_us">Business</a></li>
+                      <li class="tag_item my-2"><a href="http://192.168.0.142:8000/about_us">CreativeWeb</a></li>
+                      <li class="tag_item my-2"><a href="http://192.168.0.142:8000/about_us">Web</a></li> -->
+                    </ul> 
+                  </div>
+
+                  <div class="Marina-Luidance d-md-flex">
+                    <div class="author_imgbx"><img class="" src="{% if blog.author.avtar %}{{blog.author.avtar.url}}{% else %}{% static 'img/images/author_img.png' %}{% endif %}"></div>
+                    <div class="ms-sm-4 ms-0">
+                       <h4 class="Marina-Luidance-name color-w">{{blog.author.first_name}} &nbsp;{{blog.author.last_name}}</h4>
+                       <h4 class="text_common text-grey mb-3">{{blog.author.bio}} </h4>
+                                  
+                    </div>
+                  </div>
+                </div>
+
+              <!-- start post div sectrion -->
+                <div class="post-div">
+                  <div class="row">
+                    <div class="col-6 mt-5">
+                      {% if previous_post %}
+                      <div class="prev-posts text-grey">
+                        <a href="{{ previous_post.get_absolute_url }}">
+                          <button class="prev-post" type="button">PREV POST</button>
+                        </a>
+                        <p class="color-w mt-4 fw-medium">{{ previous_post.title }}</p>
+                    </div>
+                    {% endif %}
+                    </div>
+                    <div class="col-6 mt-5">
+                      {% if next_post %}
+                        <div class="next-posts">
+                          <a href="{{ next_post.get_absolute_url }}">
+                            <button class="next-post grdnt-color" type="button">NEXT POST</button>
+                          </a>
+                          <p class="color-w grdnt-color mt-4 fw-medium">{{ next_post.title }}</p>
+                      </div>
+                      {% endif %}
+                    </div>          
+                  </div>
+                </div>
+              <!-- end posts div section -->
+
+
+              <!-- start relative post section -->
+              {% if related_posts %}
+                <div class="relative-post">
+                  <div class="pricing-headings mb-5 mt-5">
+                      <h2 class="main-heading-comment mb-3 color-w">Related posts</h2>
+                      <p class="p-left ps-0 ms-0 text-grey">We’ve got a lot of awards for our products and services that became popular in the world.</p>
+                     </div>
+                     <div class="row">
+                       {% for posts in related_posts %}
+                      <div class="col-md-6 col-lg-6 col-sm-12">
+                        <a href="{% url 'blog_view' blog_slug=posts.slug %}">
+                            <div class="service-cards post-right mt-md-3 mt-0">
+                              <img class="service-cards-img" src="{% if posts.thumbnail %}{{posts.thumbnail.url}} {% else %} {% static 'img/images/gradientoverlay.png' %} {% endif %}">
+                              <div class="content-right big service_card_overlay">
+                                     <h6>
+                                      {% for tag in posts.tags.all %} 
+                                      <span class="cate_badge ms-0 me-2 d-inline-block mb-2">{{tag.name}}</span> 
+                                        {% endfor %}
+                                       <span class="blog_publish">{{posts.created_date}}</span></h6>
+                                     <h3 class="text_dotted post_right_content color-w">{{posts.subtitle}}</h3>
+                                  </div>
+                            </div>
+                          </a>
+                          </div>
+                         {% endfor %}
+                     </div>
+                     <div class="text-center mt-4"><a href="{% url 'blog_home' %}?tags_list={{blog.post_tags}}" class="primary_btn w-auto px-5">
+                      View more
+                     </a></div>
+                </div>
+                {% endif %}
+              <!-- end relative post section -->
+
+
+              <!-- start commoent section -->
+              <div class="comment mt-5 mb-5">
+                <div class="main-heading-comment mb-5">Comments ({{comments.count}})</div>
+                <div class="comment-cards">
+                  {% for comment in comments %}
+                    {% if comment.is_parent %}
+                  <div class="comment-card-ist pb-5 mb-5">
+                    <div class="comment-card-main-heading d-md-flex"><h4 class="commnt-card-name"><img class="commnt-card-img" src="{% if comment.author.avtar %}{{comment.author.avtar.url}}{% endif %}"> <span class="Mark Srew mx-3">
+                      {{comment.author.get_full_name}}</span><span class="dot">.</span> <span class="commnt-card-date text-grey mx-3">{{comment.created_date}}</span></h4>
+                      <div class="text-end">
+                        <button class="commnt-card-para grdnt-color" data-bs-toggle="collapse" data-bs-target="#collapse_{{comment.id}}" data-id="{{comment.id}}" aria-expanded="false" aria-controls="collapseExample">Reply</button>
+                      </div>
+                    </div>
+
+
+                    <div class="collapse" id="collapse_{{comment.id}}">
+                      <div class="">
+                        <div class="search_div p-3">
+                          <div class="form-outline">
+                            <form method="post">
+                              {% csrf_token %}
+                              <input type="hidden" name="reply_comment">
+                              <input type="hidden" name="comment_id" value="{{comment.id}}">
+                              <textarea id="search-input" type="text" class="search_post_field leave-form rounded-0 px-0" placeholder="Comment" name="reply_comment" required></textarea>
+                              <button type="submit" class="post_comment_btn reply_post d-inline-block p-2 mt-4 mb-sm-0 mb-3">Post Comment</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-grey text_common">{{comment.text}}</p>  
+                  </div>
+                  {% endif %}
+                    <!-- replies for main comment -->
+                    {% for reply in comment.children %}
+                    <div class="comment-card-ist pb-5 mb-5 ms-md-5 ms-0">
+                      <div class="comment-card-main-heading d-md-flex"><h4 class="commnt-card-name"><img class="commnt-card-img" src="{% if comment.author.avtar %}{{comment.author.avtar.url}}{% endif %}"> <span class="Mark Srew mx-3"> {{comment.author.get_full_name}}</span><span class="dot">.</span> <span class="commnt-card-date text-grey mx-3">{{comment.created_date}}</span></h4>
+                        <div class="text-end">
+                          <button class="commnt-card-para grdnt-color" data-bs-toggle="collapse" data-bs-target="#collapse_{{reply.id}}" data-id="{{comment.id}}" aria-expanded="false" aria-controls="collapseExample">Reply</button>
+                        </div>
+                      </div>
+                      <div class="collapse" id="collapse_{{reply.id}}">
+                        <div class="">
+                          <div class="search_div p-3">
+                            <div class="form-outline">
+                              <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="reply_comment">
+                                <input type="hidden" name="comment_id" value="{{comment.id}}">
+                                <textarea id="search-input" type="text" class="search_post_field leave-form rounded-0 px-0" placeholder="Comment" name="reply_comment" required></textarea>
+                                <button type="submit" id="reply_comment" class="post_comment_btn reply_post d-inline-block p-2 mt-4 mb-sm-0 mb-3">Post Comment</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text-grey text_common">{{reply.text}}</p>  
+                    </div>
+                    <!-- reply section end here -->
+
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+              </div>
+              <!-- end comment section -->
+
+              <!-- start leave section -->
+              <div class="leave-section mt-5">
+                <div class="leave-reply">
+                  <h3 class="main-heading-comment text-white mb-4">Leave A Reply</h3>
+                  <p class="text_common text-grey ps-0 ms-0">Leave your comment below.</p>
+                  <form method="post" id="comment_form">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-12 col-lg-12 col-sm-12 px-sm-5 px-0">
+                        <div class="mt-sm-3 mt-0">
+                             <textarea class="leave-form" type="text" rows="5" id="comment" name="text" placeholder="Your Comment" required></textarea>
+                        </div>
+                      </div>
+                      <input type="hidden" name="comment_form">
+                      <button type="button" id="post_comment" class="post_comment_btn d-inline-block mt-5 mb-sm-0 mb-5">Post Comment</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <!-- end leave section -->
+              <!-- end blog section -->
+              </div>
+              <!-- end blog last div -->
+
+              <!-- col 4 section start -->
+              <div class="col-lg-3 col-md-3 col-sm-12">     
+                <div class="recent_post">
+                  <h3 class="side_post_head mb-4">Recent posts </h3>
+                  {% for recent_post in latest_posts %}
+                  <div class="recent_posts_items">
+                    <a href="{% url 'blog_view' blog_slug=recent_post.slug %}">
+                    <div class="recent_post">
+                      <div class="recent_post_imgbx">
+                        <img src="{% if recent_post.thumbnail %}{{recent_post.thumbnail.url}}{% else %} {% static 'img/images/recent_post_img.png' %}{% endif %}" class="recent_post_img">
+                      </div>
+                      <div class="recent_post_info">
+                        <p class="publish_date">{{recent_post.created_at}}</p>
+                        <p class="recent_post_desc">{{recent_post.subtitle}}</p>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="search_div newsletter_div mb-5">
+                  <h3 class="side_post_head mb-4">Subscribe to Blogs </h3>
+                  <div class="form-outline mb-4">
+                    <form method="post">
+                      {% csrf_token %}
+                      <input id="entered_email" type="email" value="{{user.email}}" class="search_post_field leave-form rounded-0 ps-0" placeholder="Email" autocomplete="off" name="user_email">
+                      <input type="hidden" name="subscribe_blog">
+                      <button type="submit" id="subscribe-blog" class="search_post_btn newsletter_btn">
+                        <img src="{% static 'img/images/icon_send.png' %}">
+                      </button>
+                    </form>
+                  </div>
+                  <!-- <p class="share-social-name mb-0"><a href="" class="social_links">FB</a> <span class="dot mx-3">.</span><a href="" class="social_links">LIN</a> <span class="dot mx-3">.</span> <a href="" class="social_links">INST</a></p> -->
+                </div>
+                <h3 class="side_post_head mb-4">Tags</h3>
+                <ul class="tags_list ps-0">
+                  {% for tag in all_tags %}
+                  <li class="tag_item my-2"><a href="{% url 'blog_home' %}?tags={{tag}}">{{tag}}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="col-md-1"></div>
+              <!-- end col 4 section -->
+            </div>
+          </div>
+        </section>
+      <!-- <div class="blogs_wrapper" style="margin-top: 150px;">
+          <div class="container ps-6">
+            <div class="row mt-3">
+              <div class="col">
+                <div class="blog-title d-flex align-items-center">
+                    <svg width="50" height="1" viewBox="0 0 60 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line y1="0.5" x2="60" y2="0.5" stroke="#A9AFC3"/>
+                        </svg>
+                    <h6 style="color: #A9AFC3" class="text-gray  m-0 ms-2">BLOG</h6>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-4">
+                    <h1 class="text-white font-weight-600">{{blog.title}}<span class="dot-bg">.</span></h1>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-8">
+                <h5 class="text-white ">{{blog.subtitle}}</h5>
+              </div>
+              <div class="col">
+              </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-9">
+                  <div class="blog-img">
+                    <img class="img-fluid w-75 mb-5" src="{{blog.thumbnail}}" alt="">
+                  </div>
+
+                  <div class="post_body">
+                    {{blog.body |safe }}
+                  </div>
+
+                </div>
+                <div class="col-3">
+                  {{latest_posts}}
+                  {{all_tags}}
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-9">
+                  {{related_posts}}
+                </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-9">
+                {{comments}}
+              </div>
+            </div>
+            <div class="row mt-3">
+              <h2>Leave a comment</h2>
+              <div class="col-9">
+                <form method="post" style="margin-top: 1.3em;">
+                  {{ comment_form.as_p }}
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div> -->
+    
+      <!-- ======= Footer ======= -->
+      {% include 'includes/footer.html' %}
+      <!-- End Footer -->
+    
+      </div>
+    </div>
+    </div>
+    <input type="hidden" id="custId" name="custId" value="{{page_url}}">
+
+{% endblock %}
+
+{% block script %}
+<script>
+  user = "{{user.is_authenticated}}"
+  jQuery("#search-button").on('click', function(){
+    if (user == "False"){
+      window.location.href = "/accounts/login/"
+    }else{
+      window.location.href = "#"
+    }
+  });
+  
+  jQuery("#post_comment").on('click', function(){
+    if (user == "False"){
+      window.location.href = "/accounts/login/"
+    }else{
+      var text_value = jQuery("#comment").val()
+      if(text_value==""){
+        alert("Please enter your comment.")
+      }else{
+        jQuery("#comment_form").submit()
+      }
+    }
+  });
+  jQuery(document).ready(function(){
+    jQuery('.share-btn').on('click',function(){
+      jQuery('.social_share_listing').toggleClass('show')
+    })
+  })
+  
+function copyToClipboard(text) {
+    var sampleTextarea = document.createElement("textarea");
+    document.body.appendChild(sampleTextarea);
+    sampleTextarea.value = text; //save main text in it
+    sampleTextarea.select(); //select textarea contenrs
+    document.execCommand("copy");
+    document.body.removeChild(sampleTextarea);
+}
+
+function myFunction(){
+    var copyText = document.getElementById("custId");
+    copyToClipboard(copyText.value);
+}
+</script>
+{% endblock %}

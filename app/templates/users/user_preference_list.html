@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+
+<style>
+    .checkout_wrapper {
+        background: url("{% static 'img/images/lines-bg.png' %}") no-repeat;
+        background-size: contain;
+    }
+    .ps-6 {
+        padding-left: 8rem !important;
+    }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="main-wrap">
+
+    <!-- ======= Left side bar ======= -->
+    {% include "includes/sidebar.html" %}
+    <!-- End Header -->
+
+    <div class="right-bar">
+        <!-- ======= Header ======= -->
+        {% include "includes/header.html" %}
+        <!-- End Header -->
+
+        <!-- ======= Main Content ======= -->
+
+        <div class="checkout_wrapper" style="margin-top: 150px;">
+            <div class="container ps-6">
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="blog-title d-flex align-items-center">
+                            <svg width="50" height="1" viewBox="0 0 60 1" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <line y1="0.5" x2="60" y2="0.5" stroke="#A9AFC3" />
+                            </svg>
+                            <h6 style="color: #A9AFC3" class="text-gray  m-0 ms-2">MY PREFERENCES</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-9 col-md-6">
+                        <h1 class="text-white font-weight-600">MY PREFERENCES <span class="dot-bg">.</span></h1>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-9 col-md-6">
+                        <p class="text-gray">Research stocks and understand mark trends all in one place .</p>
+                    </div>
+                    <div class="col-3">
+                        <a  class="getstarted px-2 " href="/"> Add preferences</a>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-10 col-md-10 ">
+                        {% if user_preference %}
+
+                        <table class="table text-white font-weight-600" style="border-spacing:0 20px;">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Asset class</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">Risk</th>
+                                <th scope="col">Term</th>
+                                <th scope="col">Objective</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for preferences in user_preference %}
+                                <tr class="py-3">
+                                    <th scope="row">#</th>
+                                    <td>{{ preferences.asset_class }}</td>
+                                    <td>{{ preferences.get_country_display }}</td>
+                                    <td>{{ preferences.get_risk_display }}</td>
+                                    <td>{{ preferences.get_term_display }}</td>
+                                    <td>{{ preferences.get_objective_display }}</td>
+                                    <td><a href="{% url 'user_preference_edit' preferences.id %}"><i class="fas fa-edit"></i></a></td>
+                                    <td><a href="{% url 'login' %}"><i class="far fa-trash-alt"></i></a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                          
+                           <!-- {% for preferences in user_preference %}
+                            <ul style="list-style: none; gap:2rem" class="d-flex align-items-center ">
+                                 <li>{{preferences.asset_class}}</li>
+                                 <li>{{preferences.country}}</li>
+                                 <li>{{preferences.get_risk_display}}</li>
+                                 <li>{{preferences.get_term_display}}</li>
+                                 <li>{{preferences.get_objective_display}}</li>
+                                 <li><a href="{% url 'user_preference_edit' preferences.id %}"><i class="fas fa-edit"></i></a></li>
+                                 <li><a href="{% url 'login' %}"><i class="far fa-trash-alt"></i></a></li>
+                            </ul>    
+                           
+
+                           {% endfor %} -->
+                            
+
+                        {% else %}
+                        <h3>You have not added any preferences, please add one to receive Alerts !</h3>
+                        {% endif %}
+                    </div>
+                    
+                    
+                </div>
+
+                
+
+            </div>
+        </div>
+
+
+        <!-- ======= Footer ======= -->
+        {% include "includes/footer.html" %}
+        <!-- End Footer -->
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block script %}
+
+{% endblock %}

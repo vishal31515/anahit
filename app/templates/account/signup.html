@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+
+
+{% block content %}
+<div class="main_wrapper">
+  <div class="right_bar d-flex justify-content-center py-4">
+    <a id="previous_page" href="{% url 'home' %}" class="">
+        <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+        <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)"/>
+            <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round"/>
+            <defs>
+            <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FCB854"/>
+            <stop offset="0.479066" stop-color="#D96534"/>
+            <stop offset="0.817115" stop-color="#DC4E4F"/>
+            <stop offset="1" stop-color="#DD425D"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FCB854"/>
+            <stop offset="0.479066" stop-color="#D96534"/>
+            <stop offset="0.817115" stop-color="#DC4E4F"/>
+            <stop offset="1" stop-color="#DD425D"/>
+            </linearGradient>
+            </defs>
+            </svg>             
+    </a>
+  </div>
+  <div class="">
+    <div class="pt-3 px-md-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex align-items-center justify-content-center">
+              <div class=" mx-auto">
+                <a href="{% url 'home' %}" class="">
+                  <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login_page_wrapper py-3">
+    <div class="container">
+      <div class="login_wrapper">
+        <div class="row">
+          <div class="col-md-6 mx-auto mt-5">
+            <h2 class="primary_head text-center">Register<span class="dot-bg">.</span></h2>
+            {% if form.errors %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-error">
+              <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form action="/accounts/signup/" name="SignUpForm" id="SignUpForm" class="mb-5" method="post">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="mb-4" id="{{ field.name}}">
+                <label class="field_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                <span id="email_error"><span>
+                    {% if 'password' in field.html_name %}
+                    <div class="password_toggle">
+                      {{ field }}
+                      <span id="password_error"><span>
+
+                          <button type="button" id="pass_eye_{{field.auto_id}}" class="pass_eye">
+                            <img src="{% static 'img/images/icon_eye.png' %}">
+                          </button>
+                    </div>
+                    {% else %}
+                    {{ field }}
+                    {% endif %}
+              </div>
+              {% endfor %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+              <button data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'
+                class="g-recaptcha post_comment_btn w-100 mb-3" id="register_user">Register</button>
+              <div class="  form-check text-center d-flex justify-content-center align-items-center">
+                <input class="form-check-input cstm_checkbox me-2" type="checkbox" value="" id="terms_checkbox" checked
+                  required>
+                <label class="form-check-label login_text text-grey" for="terms_checkbox">
+                  I agree to the <a href="#" class="gradient_text">Terms of Service</a> and <a href="#"
+                    class="gradient_text">Privacy Policy</a>
+                </label>
+              </div>
+              <div class="text-center">
+                Already have a account
+                <a class="gradient_text login_text mb-0" href="{% url 'account_login' %}">Login.</a>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+  
+      </div>
+    </div>
+  </div>
+
+  {% include 'includes/footer.html' %}
+</div>
+<!-- End Footer -->
+
+{% endblock %}
+
+
+{% block script %}
+
+<script src="https://www.google.com/recaptcha/api.js?render=6LdMD1wfAAAAAGD0wUXood4KxoQaqlKhU_DsRcVS"></script>
+<script>
+  var previous_page_url = document.referrer
+  var x = document.getElementById('previous_page')
+  x.href = previous_page_url;
+</script>
+
+<script>
+
+  $(document).ready(function () {
+    $('#SignUpForm').on("submit", function () {
+
+      var email = $("#id_email").val();
+      var password = $("#id_password1").val();
+      var password2 = $("#id_password2").val();
+      var first_name = $("#id_first_name").val();
+      var last_name = $("#id_last_name").val();
+
+      var validationError = false;
+      var paras = document.getElementsByClassName('errors');
+      while (paras[0])
+        paras[0].parentNode.removeChild(paras[0]);
+      if (email == '' || email == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter a valid email address";
+        document.getElementById('email').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (password == '' || password == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter password";
+        document.getElementById('password1').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (password2 == '' || password2 == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter password again";
+        document.getElementById('password2').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (password !== password2) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "password and confirm password are not matching";
+        document.getElementById('password2').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (first_name == '' || first_name == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter first name";
+        document.getElementById('first_name').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (last_name == '' || last_name == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter last name";
+        document.getElementById('last_name').appendChild(x);
+        validationError = true;
+        return false;
+      }
+    })
+    var message_timeout = document.getElementById("django_message");
+    setTimeout(function () {
+      message_timeout.style.display = "none";
+    }, 5000);
+  });
+
+
+  function show_password(x) {
+
+    if (x.type == "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+
+  jQuery('#pass_eye_id_password1').on('click', function () {
+    var x = document.getElementById("id_password1");
+
+    show_password(x)
+  });
+
+
+  jQuery('#pass_eye_id_password2').on('click', function () {
+    var x = document.getElementById("id_password2");
+
+    show_password(x)
+  });
+
+$('#id_email').blur(function(){
+  user_email = $("#id_email").val()
+  $.ajax({
+            type: 'GET',
+            url: "{% url 'check_email_already_exists' %}",
+            data: {'email':user_email},
+            success: function (response) {
+              console.log(response)
+              var validationError = false;
+              var paras = document.getElementsByClassName('errors');
+              while (paras[0])
+                paras[0].parentNode.removeChild(paras[0]);
+              $("#register_user").prop("disabled", true)
+              var x = document.createElement("LABEL");
+              x.style.color = 'red';
+              x.className = 'errors';
+              x.innerHTML = "email id already exists";
+              document.getElementById('email').appendChild(x);
+            },
+            error: function (response) {
+              $('.errors').fadeOut('fast');
+              $("#register_user").prop("disabled", false)
+              console.log(response)
+
+            }
+        })
+})
+</script>
+{% endblock %}

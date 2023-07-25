@@ -1,0 +1,27 @@
+{% load static %}
+{% if filter_alerts %}
+{% for alert in filter_alerts %}
+<div class="col-md-6 col-lg-6 col-sm-12" >
+  <a href="{% url 'view_alert' alert.slug %}">
+  <div class="service-cards post-right mt-5">
+    <img class="service-cards-img" src="{% if alert.thumbnail %}{{ alert.thumbnail.url }}{% else %} {% static 'img/images/post_img1.png' %} {% endif %}">
+    <div class="our-service-buttons">
+      {% for tag in alert.tags.all %}
+      <button class="button-ist-servive" type="button">{{tag.name}}</button>
+      {% endfor %}
+    </div>
+    <div class="content-right big service_card_overlay">
+      <h6>
+        {% for tag in alert.tags.all %}
+        <span class="cate_badge ms-0 me-2 d-inline-block mb-2">{{tag.name}}</span> 
+        {% endfor %}
+        <span class="blog_publish">{{alert.created_at}}</span>
+      </h6>
+      <h3 class="text_dotted post_right_content color-w">{{alert.message}}</h3>
+    </div>
+  </div>
+  </a>
+</div>
+{% endfor %}
+{% endif %}
+

@@ -1,0 +1,361 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block content %}
+<div class="main_wrapper">
+  <div class="right_bar">
+  </div>
+  <div class="">
+    <div class="pt-3 px-md-5">
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex align-items-center justify-content-center">
+                <div class="pos-rel">
+                  <a href="{% url 'home' %}" class="gradient_text text-uppercase back_btn">
+                     <img  src="{% static 'img/images/arrow_gradient.png' %}">
+                    
+                     Continue Shopping
+                  </a>
+                </div>
+                <div class=" mx-auto">
+                  <a href="index.html" class="">
+                      <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login_page_wrapper top_section count_section">
+      <div class="container">
+        <div class="login_wrapper">
+            <h2 class="primary_head">Checkout<span class="dot-bg">.</span></h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto mt-5">
+                  <div class="checkout_div bb-dashed-grey">
+                    <h3 class="checkout_head">Investment</h3>
+                    <p class="text-uppercase text_common text-grey"><b>Investment</b> Sessions / month</p>
+                  </div>
+                  <div class="price_checkout_sec bb-dashed-grey pt-3">
+                    <p class="price_check login_text text-start align-items-center text-grey mb-2"><span class="price_plan me-2">$749</span><span>per<br/>month</span></p>
+                    <p class="login_text text-grey text-start mb-4">Make progress on your goals. With this plan, you get 4 coaching sessions per month with a certified coach, access to a library of curated learning content, and professional planning resources.</p>
+                    <p class="recurring_plan login_text text-grey text-start mb-4"><img src="{% static 'img/images/renew.png' %}" class="me-3">Monthly recurring subscription (cancel any time)</p>
+                  </div>
+                  <div class="total_price_sec">
+                    <div class="d-flex justify-content-between bb-dashed-grey py-3">
+                      <p class="login_text text-grey text-start mb-0">Anahit Ivestment Premium<br/>Billed Monthly</p>
+                      <p class="login_text text-grey text-start mb-0">$749</p>
+                    </div>
+                    <div class="d-flex justify-content-between py-3 bb-dashed-grey">
+                      <p class="login_text text-grey text-start mb-0">Subtotal</p>
+                      <p class="login_text text-grey text-start mb-0">$749</p>
+                    </div>
+                  </div>
+                  <div class="py-4 bb-dashed-grey">
+                    <button class="promo_btn">Add promotion code</button>
+                  </div>
+                  <div class="total_due py-3">
+                    <div class="d-flex justify-content-between">
+                      <p class="login_text text-grey text-start">Total due today</p>
+                      <p class="total_due_text">$749</p>
+                    </div>
+                  </div>
+                    <!-- <div class="row  mb-3">
+                      <div class="col-md-5 mx-auto text-center">
+                          <p>Already registered? <span class="ms-2"> <a class="gradient_text" href="{% url 'login' %}">Login</a> </span></p>
+                      </div>
+                    </div> -->
+                </div>
+                <div class="col-md-6 mx-auto mt-5">
+                    <form class="row g-3 needs-validation" novalidate>
+                          <div class="card-info">
+                              <button class="apply_pay_btn">
+                                  Apple Pay
+                              </button>
+                              <p class="text-divider"><span>Or pay with card</span></p>
+                              <div class="mb-3 pos-rel">
+                                <label class="field_label label_in" for="full_name">Email</label>
+                                <input type="email" name="full_name" id="full_name" placeholder="Email Address" class="common_field form-control field_login text-center" />
+                                <button class="gradient_text login_btn_field">Login</button>
+                              </div>
+                              <select class="custom-form-select mb-3" aria-label="Default select example">
+                                  <option selected>Personal Account</option>
+                                  <option value="1">Account1</option>
+                                  <option value="2">Account2</option>
+                                  <option value="3">Account3</option>
+                              </select>
+                              <div class="mb-3 card-info">
+                                  <label for="exampleFormControlInput1" class="form-label">Card information</label>
+                                  <div class="visitig-crd">
+                                  <input type="email" class="custom-form-control" id="exampleFormControlInput1" placeholder="**** **** **** 1234">
+                                  <img class="vissa-card" src="{% static 'img/images/cards.png' %}" alt="visiting card"/>
+                                  </div>
+                              </div>
+                              <div class="mb-3 month-cvv">
+                                  <input type="email" class="custom-form-control mb-3 card-mm-yy" id="exampleFormControlInput1" placeholder="MM / YY">
+                                  <input type="email" class="custom-form-control mb-3 card-cvc" id="exampleFormControlInput1" placeholder="CVC">
+                              </div>
+                              <div class="mb-3 ">
+                                  <label for="exampleFormControlInput1" class="form-label">Name on card</label>
+                                  <input type="email" class="custom-form-control" id="exampleFormControlInput1" placeholder="">
+                              </div>
+                              <div class="mb-3 ">
+                                  <label for="exampleFormControlInput1" class="form-label">Country or region</label>
+                                  <input type="email" class="custom-form-control" id="exampleFormControlInput1" placeholder="">
+                              </div>
+                              <div class="mb-3">
+                                  <button class="secondary_btn mt-3 w-100">Subscribe</button>
+                              </div>
+                              <p class="field_label text-center px-3">By confirming your subscription, you allow Anahit to charge your card for this payment and future payments in accordance with their terms and conditions.</p>
+                          </div>
+                      </form>
+                    <!-- <div class="row  mb-3">
+                      <div class="col-md-5 mx-auto text-center">
+                          <p>Already registered? <span class="ms-2"> <a class="gradient_text" href="{% url 'login' %}">Login</a> </span></p>
+                      </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- <form id='register_from' action="{% url 'register' %}"  method="post">
+              {% csrf_token %}
+              
+                <div class="row  mt-3 mb-3">
+                  <div class="col-md-8 mx-auto">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        {{ form.first_name.label_tag }}
+                        {{form.first_name}}
+                        {{ form.first_name.errors }}
+                      </div>
+                      <div class="col-md-6 ">
+                        {{ form.last_name.label_tag }}
+                        {{form.last_name}}
+                        {{ form.last_name.errors }}
+                      </div>
+                    </div> 
+                  </div>  
+                </div>
+
+                <div class="row  mb-3">
+                  <div class="col-md-8 mx-auto">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        {{ form.username.label_tag }}
+                        {{form.username}}
+                        {{ form.username.errors }}
+                      </div>
+                      <div class="col-md-6 ">
+                        {{ form.email.label_tag }}
+                        {{form.email}}
+                        {{ form.email.errors }}
+                      </div>
+                    </div> 
+                  </div>  
+                </div>
+
+                <div class="row  mb-4">
+                  <div class="col-md-8 mx-auto">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        {{ form.password1.label_tag }}
+                        <div class="input-group">  
+                          {{form.password1}}
+                          <span class="passwordToggle">
+                            <i class="far fa-eye " id="togglePassword1"></i>
+                          </span>
+                        </div>
+                        {{ form.password1.errors }} 
+                      </div>
+
+                      <div class="col-md-6 ">
+                        {{ form.password2.label_tag }}
+                        <div class="input-group">  
+                          {{form.password2}}
+                          <span class="passwordToggle">
+                            <i class="far fa-eye " id="togglePassword2"></i>
+                          </span>
+                        </div>
+                        {{ form.password2.errors }}
+                      </div>
+                    </div> 
+                  </div>  
+                </div>
+
+
+                <div class="row  mb-3">
+                    <div class="col-md-5 mx-auto">
+                        <label class="auth_lable" for="exampleFormControlInput1" class="form-label">User Name</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="username">
+                    </div>
+                </div>
+
+                <div class="row  mb-3">
+                    <div class="col-md-5 mx-auto">
+                        <label class="auth_lable" for="exampleFormControlInput1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="***************">
+                    </div>
+                </div>
+
+                <div class="row  mb-4">
+                    <div class="col-md-5 mx-auto">
+                        <label class="auth_lable" for="exampleFormControlInput1" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="***************">
+                    </div>
+                </div>
+
+            
+
+            </form> -->
+
+            
+
+        </div>
+      </div>
+    </div>
+
+{% include 'includes/footer.html' %}
+  </div>
+  <!-- End Footer -->
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+  var validation = new window.JustValidate('#register_from');
+  validation
+    .addField('#id_first_name', [
+      {
+        rule: 'required',
+        errorMessage: 'First name is required',
+      }
+    ])
+    .addField('#id_last_name', [
+      {
+        rule: 'required',
+        errorMessage: 'Last name is required',
+      }
+    ])
+    .addField('#id_password1', [
+      {
+        rule: 'required',
+        errorMessage: 'Password is required',
+      },
+      {
+        rule: 'strongPassword',
+        errorMessage: 'Minimum eight characters, one uppercase letter, one lowercase letter, one number and one special character',
+      }
+    ])
+    .addField('#id_password2', [
+      {
+        rule: 'required',
+        errorMessage: 'Confirm password is required',
+      },
+      {
+        validator: (value, fields) => {
+          if (
+            fields['#id_password1'] &&
+            fields['#id_password1'].elem
+          ) {
+            const repeatPasswordValue = fields['#id_password1'].elem.value;
+
+            return value === repeatPasswordValue;
+          }
+
+          return true;
+        },
+        errorMessage: 'Passwords should be the same',
+      },
+    ])
+  validation.addField('#id_email', [
+      {
+        rule: 'required',
+        errorMessage: 'Email is required',
+      },
+      {
+        rule: 'email',
+        errorMessage: 'Email is invalid!',
+      },
+      {
+        validator: (value) => () => {
+          console.log(value)
+          return new Promise((resolve) => {
+            fetch('/auth/checkusername/?type=email&value=' + value)
+              .then(function (response) {
+                if (response.status == 200)
+                  resolve(true)
+                else {
+                  resolve(false)
+                }
+              })
+          });
+        },
+        errorMessage: 'Email is already taken',
+      },
+    ],
+    {
+        successMessage: 'Looks good!',
+    }
+    );
+    validation.addField('#id_username', [
+      {
+        rule: 'required',
+        errorMessage: 'Username is required',
+      },
+      {
+        validator: (value) => () => {
+          console.log(value)
+          return new Promise((resolve) => {
+            fetch('/auth/checkusername/?type=username&value=' + value)
+              .then(function (response) {
+                if (response.status == 200)
+                  resolve(true)
+                else {
+                  resolve(false)
+                }
+              })
+          });
+        },
+        errorMessage: 'Username is already taken',
+      },
+    ],
+    {
+        successMessage: 'Looks good!',
+    }
+    );  
+
+    validation.onSuccess((event) => {
+      event?.preventDefault();
+      console.log(event)
+      event.target.submit();
+    });
+
+</script>
+
+<script>
+  var togglePassword = document.querySelectorAll(".passwordToggle");
+  var password = document.querySelector("#id_password1");
+
+  for (var  i = 0; i < togglePassword.length; i++) {
+    togglePassword[i].addEventListener("click", function() {
+       // toggle the type attribute
+        var  type = this.previousElementSibling.getAttribute("type") === "password" ? "text" : "password";
+        this.previousElementSibling.setAttribute("type", type);
+        // toggle the eye icon
+        this.firstElementChild.classList.toggle('fa-eye');
+        this.firstElementChild.classList.toggle('fa-eye-slash');
+     });
+ }
+
+
+</script>
+
+{% endblock %}

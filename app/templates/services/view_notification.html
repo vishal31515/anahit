@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  .ps-6{
+     padding-left: 8rem !important; 
+  }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+    
+    <div class="right-bar">
+      <!-- ======= Header ======= -->
+      {% include 'includes/header.html' %}
+      <!-- End Header -->
+      
+      <!-- start blog section -->
+        <section class="top_section count_section post_single">
+          <div class="ins about_pattern post_sec_pattrn mobile_hide">
+              <div class="c1"></div>
+              <div class="c2"></div>
+              <div class="c3"></div>
+              <div class="c4"></div>
+              <div class="c5"></div>
+              <div class="c6"></div>
+              <div class="c7"></div>
+          </div>
+
+          <div class="ins about_pattern mobile_hide">
+              <div class="c1"></div>
+              <div class="c2"></div>
+              <div class="c3"></div>
+              <div class="c4"></div>
+              <div class="c5"></div>
+              <div class="c6"></div>
+              <div class="c7"></div>
+          </div>
+          <div class="container">
+            <h5 class="sub_head text-grey mb-4"><img class="head_line" src="{% static 'img/images/title-Line.png' %}"> NOTIFICATION</h5>
+                  <h2 class="primary_head">{{notification.channel}}<span class="dot-bg">.</span></h2>
+            <div class="row">
+              <div class="col-lg-8 col-md-12 col-sm-12">
+              <!-- start image section -->
+                <div class="post-part-ist">
+                  <img class="w-100" src="{% if notification.thumbnail %}{{notification.thumbnail.url}} {% else %} {% static 'img/images/post_img1.png' %} {% endif %}">
+                  <h4 class="blog-img-heading">{{notification.asset_class}}</h4>
+                  <p class="post-para text-grey mb-5">{{notification.message}}</p>
+                </div>
+               
+
+              <!-- start post div sectrion -->
+              <div class="post-div">
+                <div class="row">
+                  <div class="col-6 mt-5">
+                    {% if previous_post %}
+                    <div class="prev-posts">
+                      <a href="{{ previous_post.slug }}">
+                        <button class="prev-post grdnt-color" type="button">PREV POST</button>
+                      </a>
+                        <p class="color-w grdnt-color mt-4 fw-medium">{{ previous_post.channel }}</p>
+                  </div>
+                  {% endif %}
+                  </div>
+                  <div class="col-6 mt-5">
+                    {% if next_post %}
+                      <div class="next-posts">
+                        <a href="{{ next_post.slug }}">
+                          <button class="next-post grdnt-color" type="button">NEXT POST</button>
+                        </a>
+                          <p class="color-w grdnt-color mt-4 fw-medium">{{ next_post.channel }}</p>
+                    </div>
+                    {% endif %}
+                  </div>          
+                </div>
+              </div>
+              <!-- end posts div section -->
+
+              </div>
+              <!-- end blog last div -->
+
+            </div>
+          </div>
+        </section>
+    
+      <!-- ======= Footer ======= -->
+      {% include 'includes/footer.html' %}
+      <!-- End Footer -->
+    
+      </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+  user = "{{user.is_authenticated}}"
+  jQuery("#search-button").on('click', function(){
+    if (user == "False"){
+      window.location.href = "/accounts/login/"
+    }else{
+      window.location.href = "#"
+    }
+  });
+  
+  jQuery("#post_comment").on('click', function(){
+    if (user == "False"){
+      window.location.href = "/accounts/login/"
+    }else{
+      var text_value = jQuery("#comment").val()
+      if(text_value==""){
+        alert("Please enter your comment.")
+      }else{
+        jQuery("#comment_form").submit()
+      }
+    }
+  });
+</script>
+{% endblock %}

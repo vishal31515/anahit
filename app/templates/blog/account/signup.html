@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+
+
+{% block content %}
+<div class="main_wrapper">
+  <div class="right_bar">
+  </div>
+  <div class="">
+    <div class="pt-3 px-md-5">
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex align-items-center justify-content-center">
+                <div>
+                  <a id="previous_page" href="{% url 'home' %}" class=" ">
+                      <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+                      <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)"/>
+                          <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round"/>
+                          <defs>
+                          <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#FCB854"/>
+                          <stop offset="0.479066" stop-color="#D96534"/>
+                          <stop offset="0.817115" stop-color="#DC4E4F"/>
+                          <stop offset="1" stop-color="#DD425D"/>
+                          </linearGradient>
+                          <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#FCB854"/>
+                          <stop offset="0.479066" stop-color="#D96534"/>
+                          <stop offset="0.817115" stop-color="#DC4E4F"/>
+                          <stop offset="1" stop-color="#DD425D"/>
+                          </linearGradient>
+                          </defs>
+                          </svg>             
+                    </a>
+                </div>
+                <div class=" mx-auto">
+                  <a href="{% url 'home' %}" class="">
+                      <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login_page_wrapper py-3">
+      <div class="container">
+        <div class="login_wrapper">
+            <div class="row">
+                <div class="col-md-6 mx-auto mt-5">
+                    <h2 class="primary_head text-center">Register<span class="dot-bg">.</span></h2>
+                    {% if form.errors %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                      <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <form action="/accounts/signup/" class="mb-5" method="post">
+                      {% csrf_token %}
+                      {% for field in form %}
+                          <div class="mb-4">
+                              <label class="field_label" for="{{ field.auto_id }}<">{{ field.label }}</label>
+                              
+                              {% if 'password' in field.html_name %}
+                                <div class="password_toggle">
+                                  {{ field }}
+                                  <button type="button" id={{field.html_name}} class="pass_eye">
+                                    <img src="{% static 'img/images/icon_eye.png' %}">
+                                  </button>
+                                </div>
+                              {% else %}
+                                {{ field }}
+                              {% endif %}
+                          </div>
+                      {% endfor %}
+                       <!--  <div class="mb-4">
+                            <label class="field_label" for="full_name">First Name</label>
+                            <input type="text" name="email" id="full_name" placeholder="First Name" class="common_field form-control" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="field_label" for="full_name">Last Name</label>
+                            <input type="text" name="last" id="full_name" placeholder="Last Name" class="common_field form-control" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="field_label" for="login_email">Email</label>
+                            <input type="email" name="email" id="login_email" placeholder="Email Address" class="common_field form-control" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="field_label" for="password_login">Password</label>
+                            <div class="password_toggle">
+                              <input type="password" name="password1" id="password_login" placeholder="Password" class="common_field form-control" />
+                              <button type="button" class="pass_eye">
+                                <img src="{% static 'img/images/icon_eye.png' %}">
+                              </button>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="field_label" for="confirm_password_login">Confirm Password</label>
+                            <div class="password_toggle">
+                              <input type="password" name="password2" id="confirm_password_login" placeholder="Confirm Password" class="common_field form-control" />
+                              <button type="button" class="pass_eye">
+                                <img src="{% static 'img/images/icon_eye.png' %}">
+                              </button>
+                            </div>
+                        </div> -->
+                        <button class="post_comment_btn w-100 mb-3">Register</button>
+                        <div class="form-check text-center d-flex justify-content-center align-items-center">
+                          <input class="form-check-input cstm_checkbox me-2" type="checkbox" value="" id="terms_checkbox" checked required>
+                          <label class="form-check-label login_text text-grey" for="terms_checkbox">
+                            I agree to the <a href="#" class="gradient_text">Terms of Service</a> and <a href="#" class="gradient_text">Privacy Policy</a>
+                          </label>
+                        </div>
+                        <div class="text-center">
+                          Already have a account
+                          <a class="gradient_text login_text mb-0" href="{% url 'account_login' %}">Login.</a>
+                      </div>
+                    </form>
+                    <!-- <div class="row  mb-3">
+                      <div class="col-md-5 mx-auto text-center">
+                          <p>Already registered? <span class="ms-2"> <a class="gradient_text" href="">Login</a> </span></p>
+                      </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- <form id='register_from' action=""  method="post">
+              {% csrf_token %}
+              
+                <div class="row  mt-3 mb-3">
+                  <div class="col-md-8 mx-auto">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        {{ form.first_name.label_tag }}
+                        {{form.first_name}}
+                        {{ form.first_name.errors }}
+                      </div>
+                      <div class="col-md-6 ">
+                        {{ form.last_name.label_tag }}
+                        {{form.last_name}}
+                        {{ form.last_name.errors }}
+                      </div>
+                    </div> 
+                  </div>  
+                </div>
+
+                <div class="row  mb-3">
+                  <div class="col-md-8 mx-auto">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        {{ form.username.label_tag }}
+                        {{form.username}}
+                        {{ form.username.errors }}
+                      </div>
+                      <div class="col-md-6 ">
+                        {{ form.email.label_tag }}
+                        {{form.email}}
+                        {{ form.email.errors }}
+                      </div>
+                    </div> 
+                  </div>  
+                </div>
+
+                <div class="row  mb-4">
+                  <div class="col-md-8 mx-auto">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        {{ form.password1.label_tag }}
+                        <div class="input-group">  
+                          {{form.password1}}
+                          <span class="passwordToggle">
+                            <i class="far fa-eye " id="togglePassword1"></i>
+                          </span>
+                        </div>
+                        {{ form.password1.errors }} 
+                      </div>
+
+                      <div class="col-md-6 ">
+                        {{ form.password2.label_tag }}
+                        <div class="input-group">  
+                          {{form.password2}}
+                          <span class="passwordToggle">
+                            <i class="far fa-eye " id="togglePassword2"></i>
+                          </span>
+                        </div>
+                        {{ form.password2.errors }}
+                      </div>
+                    </div> 
+                  </div>  
+                </div>
+
+
+                <div class="row  mb-3">
+                    <div class="col-md-5 mx-auto">
+                        <label class="auth_lable" for="exampleFormControlInput1" class="form-label">User Name</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="username">
+                    </div>
+                </div>
+
+                <div class="row  mb-3">
+                    <div class="col-md-5 mx-auto">
+                        <label class="auth_lable" for="exampleFormControlInput1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="***************">
+                    </div>
+                </div>
+
+                <div class="row  mb-4">
+                    <div class="col-md-5 mx-auto">
+                        <label class="auth_lable" for="exampleFormControlInput1" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="***************">
+                    </div>
+                </div>
+
+            
+
+            </form> -->
+
+            
+
+        </div>
+      </div>
+    </div>
+
+{% include 'includes/footer.html' %}
+  </div>
+  <!-- End Footer -->
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+  function myFunction(x) {
+    
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  jQuery('#password1').on('click', function(){
+    var x = document.getElementById("id_password1");
+    myFunction(x)
+  });
+  jQuery('#password2').on('click', function(){
+    var x = document.getElementById("id_password2");
+    myFunction(x)
+  });
+  
+  var previous_page_url = document.referrer
+  var x = document.getElementById('previous_page')
+  x.href = previous_page_url;
+</script>
+
+{% endblock %}

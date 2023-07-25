@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  .ps-6 {
+    padding-left: 8rem !important;
+  }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+
+  <div class="right-bar">
+    <!-- ======= Header ======= -->
+    {% include 'includes/header.html' %}
+    <!-- End Header -->
+
+    <div>
+      <!-- start pricing section -->
+      <section class="pricing ">
+        <div class="container">
+          <div class="ins about_pattern mobile_hide">
+            <div class="c1"></div>
+            <div class="c2"></div>
+            <div class="c3"></div>
+            <div class="c4"></div>
+            <div class="c5"></div>
+            <div class="c6"></div>
+            <div class="c7"></div>
+          </div>
+          <div class="">
+            <div class="pricing-headings">
+              <h5 class="sub_head text-grey"><img class="head_line" src="{%static 'img/images/title-Line.png' %}"> 
+                how much does it cost’s</h5>
+              <h2 class="primary_head">prices packages</h2>
+              <p class="p-left ps-0 ms-0 text-grey mb-70">We’ve got a lot of awards for our products and services
+                that<br> became popular in the world.</p>
+            </div>
+          </div>
+          <ul class="nav nav-pills mb-3 align-items-center justify-content-center mt-3 mb-5" id="pills-tab"
+            role="tablist">
+            <li class="nav-item me-5" role="presentation">
+              <button class="nav-link active price_tab" id="monthly-price-tab" data-bs-toggle="pill"
+                data-bs-target="#monthly-price-view" type="button" role="tab" aria-controls="pills-profile"
+                aria-selected="false">
+                Monthly
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link price_tab" id="yearly-price-tab" data-bs-toggle="pill"
+                data-bs-target="#yearly-price-view" type="button" role="tab" aria-controls="pills-home"
+                aria-selected="true">
+                Yearly
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- start pricing cards -->
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="monthly-price-view" role="tabpanel"
+            aria-labelledby="pills-monthly-tab" tabindex="0">
+            <div class="cards-pricing">
+              <div class="container">
+                <div class="row mt-40 pt-4">
+                  {% for plan in plans %}
+                  {% if plan.plan_type == 'monthly' %}
+                  <div class="col-lg-4 col-md-6 col-sm-6 p-0 ">
+                    <div
+                      class="{% if plan.is_popular %} card-ist-pricing h-100 crd-bg-scnd text-center pb-sm-0 pb-5 
+                      {% else %} card-ist-pricing h-100 mt-40 pb-5 crd-bg-ist text-center {% endif %}">
+                      <div
+                        class="{% if plan.is_popular %}pricing-card2-gradient {% else %} pricing-card-simple
+                         {% endif %}">
+
+                        <h4 class="pricing-cards-heading color-w mb-3 desk-hide">{{plan.plan_name}}</h4>
+                        <h4 class="pricing-cards-heading color-w mb-3 mobile_hide">{{plan.plan_name}}</h4>
+                        <h3 class="pricing-cards-rs color-w">
+                          <p class=""><sup class="pricing_text">$</sup><sub class="zero">{{plan.price}}</sub><sup
+                              class="pricing_text"></sup></p>
+                        </h3>
+                        <p class="pricing-cards-para color-w">per month</p>
+                      </div>
+                      <div class="pricing-cards-names color-w pt-5 px-5">
+                        {% for feature in plan.features.all %}
+                        <h4 class="pricing-cards-name1 mb-4 py-1"> {{feature}}</h4>
+                        {% endfor %}
+                      </div>
+                      {% if current_plan == None %}
+                      {% if plan.price|slugify == Free_Plan_PRICE %}
+
+                      {% if user.is_authenticated %}
+                      <span class="secondary_btn">
+                        MANAGE
+                      </span>
+                      {% else %}
+                      <a href="{% url 'account_login' %}">
+                        <span class="secondary_btn">Get Started</span>
+                      </a>
+                      {% endif %}
+
+                      {% else %}
+                      <a
+                        href="{% if user.is_authenticated %}{% url 'stripe_checkout' product_id=plan.id %}{% else %}{% url 'account_login' %} {% endif %}">
+                        <button class="secondary_btn">
+                          Buy Now
+                        </button>
+                      </a>
+                      {% endif %}
+                      {% else %}
+                      {% if current_plan.plan.plan_name == plan.plan_name %}
+                      <a href="{% url 'user_preference' %}">
+                        <span class="pricing-card-button color-w mt-4" type="button">Manage </span>
+                      </a>
+                      {% elif plan.price|slugify == Free_Plan_PRICE %}
+                      <a
+                        href="{% url 'cancel-subscription' sub_id=current_plan.stripe_sub price_id=plan.stripe_price_id %}?page=price">
+                        <button class="pricing-card-button color-w mt-4" type="button">SWITCH</button>
+                      </a>
+                      {% else %}
+                      <a
+                        href="{% url 'update-subscription' sub_id=current_plan.stripe_sub price_id=plan.stripe_price_id %}?page=price">
+                        <button class="pricing-card-button color-w mt-4" type="button">SWITCH</button>
+                      </a>
+                      {% endif %}
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="yearly-price-view" role="tabpanel" aria-labelledby="pills-yearly-tab"
+            tabindex="0">
+            <div class="cards-pricing">
+              <div class="container">
+                <div class="row mt-40 pt-4">
+                {% for plan in plans %}
+                  {% if plan.plan_type == 'yearly' %}
+                  <div class="col-lg-4 col-md-6 col-sm-6 p-0 ">
+                    <div
+                      class="{% if plan.is_popular %} card-ist-pricing h-100 crd-bg-scnd text-center pb-sm-0 pb-5
+                       {% else %}
+                      card-ist-pricing h-100 mt-40 pb-5 crd-bg-ist text-center {% endif %}">
+                      <div
+                        class="{% if plan.is_popular %}pricing-card2-gradient {% else %} pricing-card-simple {% endif %}">
+                        <h4 class="pricing-cards-heading color-w mb-3 desk-hide">{{plan.plan_name}}</h4>
+                        <h4 class="pricing-cards-heading color-w mb-3 mobile_hide">{{plan.plan_name}}</h4>
+                        <h3 class="pricing-cards-rs color-w">
+                          <p class=""><sup class="pricing_text">$</sup><sub class="zero">{{plan.price}}</sub><sup
+                              class="pricing_text"></sup></p>
+                        </h3>
+                        <p class="pricing-cards-para color-w">per month</p>
+                      </div>
+                      <div class="pricing-cards-names color-w pt-5 px-5">
+                        {% for feature in plan.features.all %}
+                        <h4 class="pricing-cards-name1 mb-4 py-1"> {{feature}}</h4>
+                        {% endfor %}
+                      </div>
+                      {% if current_plan == None %}
+                      {% if plan.price|slugify == Free_Plan_PRICE %}
+
+                      {% if user.is_authenticated %}
+                      <span class="secondary_btn">
+                        MANAGE
+                      </span>
+                      {% else %}
+                      <a href="{% url 'account_login' %}">
+                        <span class="secondary_btn">Get Started</span>
+                      </a>
+                      {% endif %}
+                      {% else %}
+                      <a
+                        href="{% if user.is_authenticated %}{% url 'stripe_checkout' product_id=plan.id %}{% else %}
+                        {% url 'account_login' %} {% endif %}">
+                        <button class="secondary_btn">
+                          Buy Now
+                        </button>
+                      </a>
+                      {% endif %}
+                      {% else %}
+                      {% if current_plan.plan.plan_name == plan.plan_name %}
+                      <a href="{% url 'user_preference' %}">
+                        <span class="pricing-card-button color-w mt-4" type="button">Manage </span>
+                      </a>
+                      {% elif plan.price|slugify == Free_Plan_PRICE %}
+                      <a href="{% url 'cancel-subscription' sub_id=current_plan.stripe_sub price_id=plan.stripe_price_id %}?page=price">
+                        <button class="pricing-card-button color-w mt-4" type="button">SWITCH</button>
+                      </a>
+                      {% else %}
+                      <a
+                        href="{% url 'update-subscription' sub_id=current_plan.stripe_sub price_id=plan.stripe_price_id %}?page=price">
+                        <button class="pricing-card-button color-w mt-4" type="button">SWITCH</button>
+                      </a>
+                      {% endif %}
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% endif %}
+                {% endfor %}
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--end pricing section  -->
+    </div>
+
+    <!-- ======= Footer ======= -->
+    {% include 'includes/footer.html' %}
+    <!-- End Footer -->
+
+  </div>
+</div>
+</div>
+
+{% endblock %}

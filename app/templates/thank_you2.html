@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+<div class="main-wrap">
+  {% include 'includes/sidebar.html' %}
+    
+    <div class="right-bar">
+      <!-- ======= Header ======= -->
+      {% include 'includes/header.html' %}
+      <!-- End Header -->
+    
+      <main id="main" class="pb-md-5">
+
+        <section id="about" class="count_section top_section">
+
+    
+          <div class="container" data-aos="fade-up">
+            <div class="row gx-0">
+              <div class="col-lg-12  flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="">
+                  <h5 class="sub_head text-grey"><img src="{% static 'img/images/title-Line.png' %}"> Thank you</h5>
+                  <h3 class="primary_head">You just joined 15K <br class="mobile_hide" />subscribers using Anahit to <br class="mobile_hide" />tackle financial woes!<span class="dot-bg">.</span></h3>
+                  
+                  <p class="text_common text-grey">Thank you for subscribing to free insights on Anahit. We’ll start <br class="mobile_hide" />sending insights to your inbox soon.</p>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </section><!-- End About Section -->
+    
+        
+        <!-- Video Section -->
+        <section class="video-sec">
+          <div class="container" data-aos="fade-up">
+            <div class="video-inner">
+              <button class="play_btn" data-bs-toggle="modal" data-bs-target="#video_popup">
+                <img src="{% static 'img/images/btn_play.png' %}">
+              </button>
+          </div>
+        </section>
+        <!-- Video Section End -->
+    
+    
+      </main><!-- End #main -->
+      <!-- Modal -->
+      <div class="modal fade" id="video_popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <video controls class="w-100">
+                <source src="{% static 'video/dummy.mp4' %}" type="">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ======= Footer ======= -->
+      {% include 'includes/footer.html' %}
+      <!-- End Footer -->
+    
+      </div>
+    </div>
+    
+
+{% endblock %}

@@ -1,0 +1,819 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- {% include "includes/header.html" %}
+
+<head>
+  <style>
+    
+  </style>
+
+</head>
+<div class="main_wrapper">
+  <div class="right_bar d-flex justify-content-center py-4">
+    <div>
+      <a href="{% url 'home' %}" class=" ">
+        <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+        <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)" />
+          <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FCB854" />
+              <stop offset="0.479066" stop-color="#D96534" />
+              <stop offset="0.817115" stop-color="#DC4E4F" />
+              <stop offset="1" stop-color="#DD425D" />
+            </linearGradient>
+            <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FCB854" />
+              <stop offset="0.479066" stop-color="#D96534" />
+              <stop offset="0.817115" stop-color="#DC4E4F" />
+              <stop offset="1" stop-color="#DD425D" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="">
+    <div class="px-md-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex align-items-center justify-content-center">
+              <div class=" mx-auto">
+                <a href="{% url 'home' %}" class="">
+                  <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login_page_wrapper my-account-wrap top_section text-grey py-3">
+    <div class="container">
+      <div class="login_wrapper">
+        <div class="pricing-headings mb-5 d-flex justify-content-between">
+
+          <h2 class="primary_head mb-3">My Account<span class="dot-bg">.</span></h2>
+          <div class="profile-dropdown dropdown">
+            <img class="dropdown-toggle profile-dropdown-img"
+              src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}"
+              alt="profile-dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" />
+            <div class="dropdown-menu dropdown_user mt-2 p-3" aria-labelledby="dropdownMenuButton1">
+              <div class="d-flex align-items-center">
+                <img
+                  src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}"
+                  class="dropdown-profile-img" />
+                <div class="ms-3">
+                  <h5 class="user-name">{{request.user.email}}</h5>
+                </div>
+              </div>
+              <ul class="user-menu  p-0 mt-4 mb-0">
+                <li><a class="dropdown-item" href="{% url 'my_account' %}"><img class="hover-hide me-2" src="{% static 'img/images/user_acc.png' %}"/><img class="hover-active me-2" src="{% static 'img/images/user-grdt.png' %}"/>My Account</a></li>
+
+                <li><a class="dropdown-item" href="{% url 'user_preference' %}"><img class=" me-2"
+                      src="{% static 'img/images/Preference.png' %}" />My Preference</a></li>
+                <li><a class="dropdown-item" href="{% url 'invoice_history' %}"><img class="hover-hide me-2"
+                  src="{% static 'img/images/prev-order.png' %}" /><img class="hover-active me-2"
+                  src="{% static 'img/images/prev-order-grd.png' %}" />My Previous Orders</a></li>
+                <form action="{% url 'account_logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item"><img class=" me-2"
+                      src="{% static 'img/images/exit.png' %}" />Logout</button>
+                </form>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% for message in messages %}
+        {%if "password_not_matched" in message.tags %}
+        <div class="alert alert-danger" id="message_timeout">
+          {{message}}
+        </div>
+        {% elif "weak_password" in message.tags %}
+        <div class="alert alert-danger" id="message_timeout">
+          {{message}}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <script>
+          var message_timeout = document.getElementById("message_timeout");
+          setTimeout(function () {
+            message_timeout.style.display = "none";
+          }, 4000);
+        </script>
+
+        <div class="account_wrapper">
+          <div class="row">
+            <div class="col-md-7">
+              <form class="row g-3 needs-validation" novalidate method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="your-prifile ">
+                  <h5 class="text-grey mb-5">Your Profile</h5>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="profile-left text-center">
+                        <div class="profile-pic mb-3">
+                          <img class="profile-img"
+                            src="{% if request.user.avtar %} {{ request.user.avtar.url }} {% else %} {% static 'user_image/default_image.jpg' %} {% endif %}"
+                            alt="profile pic" />
+                          <label for="picture" class="upload_label"><img src="{% static 'img/images/camera.png' %}"
+                              class="upload_pic_img"></label>
+                          <input type="file" id="picture" class="d-none" name="picture">
+                        </div>
+                        <p class="profile-tip">
+                          Tip: Choose an image where your face is recognisable.
+                        </p>
+                        <p class="image-type">
+                          .JPG, .GIF or .PNG. Max 20MB
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="first_name" class="form-label">First Name</label>
+                          <input type="text" class="custom-form-control" id="first_name" name="first_name"
+                            placeholder="First name" value="{{ request.user.first_name }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="last_name" class="form-label">Last Name</label>
+                          <input type="text" class="custom-form-control" id="last_name" name="last_name"
+                            placeholder="Last name" value="{{ request.user.last_name }}">
+                        </div>
+                        <div class="mb-3">
+                          <label for="bio" class="form-label">Bio</label>
+                          <textarea class="custom-form-control" id="bio" name="bio" rows="5"
+                            placeholder="Describe yourself here">{{ request.user.bio }}</textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-detaila text-grey">
+                  <h5 class="mb-5">Contact details</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <input type="email" class="custom-form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" value="{{ request.user.email }}" disabled>
+                      <div id="emailHelp" class="form-text mt-2 d-flex align-items-center"> <img class="me-2"
+                          src="{% static 'img/images/Subtract.png' %}" alt=""> Your email address is verified.</div>
+                    </div>
+                    <div class="col-md-6 mb-3" id="password_error">
+                      <label for="password" class="form-label">New Password</label>
+                      <div class="password_toggle mb-3">
+                        <input type="password" name="password" id="password" placeholder="password"
+                          class="custom-form-control"
+                          title="Your password must contain at least 1 number, 1 uppercase, 1 lowercase, 1 special character and minimun length of 8 characters." />
+                        <button type="button" class="pass_eye" id="password_eye">
+                          <img src="{% static 'img/images/icon_eye.png' %}">
+                        </button>
+                      </div>
+                      <div class="password_toggle  mb-3">
+                        <input type="password" name="confirm_password" id="confirm_password"
+                          placeholder="Confirm Password" class="custom-form-control"
+                          title="Your password must contain at least 1 number, 1 uppercase, 1 lowercase, 1 special character and minimun length of 8 characters." />
+                        <button type="button" class="pass_eye" id="confirm_password_eye">
+                          <img src="{% static 'img/images/icon_eye.png' %}">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-md-6" id="number_error">
+                      <div>
+                        <label for="phone number" class="form-label">Phone Number</label>
+                        <div class="d-flex">
+
+                          <input type="tel" id="country_code" class="custom-form-control me-2 country-code" {% if
+                            request.user.country_code %} value="{{ request.user.country_code }}" {% endif
+                            %}name="country_code">
+
+                          <input type="number" class="custom-form-control mob-number" id="phone" aria-describedby="" 
+                          {% if request.user.phone %}value="{{ request.user.phone }}" {% else %}placeholder="phone number" {% endif %} name="phone"
+                            title="Please enter valid 10 digit phone number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="select_box">
+                        <label for="asset_choices" class="form-label">Select Gender</label>
+                        <div class="stock_select_div">
+                          <select class="custom-form-select" aria-label="Default select example" name="gender"
+                            id="gender">
+                            {% if request.user.gender %}
+                            <option selected value="{{ request.user.gender }}" disabled selected>{{ request.user.gender }}
+                            </option>
+                            <!-- <option value="" disabled >--Select--</option> -->
+                            {% else %}
+                            <option value="" disabled selected>--Select--</option>
+                            {% endif %}
+                            {% if user_gender %}
+                            {% for key,value in user_gender %}
+                            <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                            {% endif %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label for="birthday" class="form-label">Birthday</label>
+                      <input type="date" class="custom-form-control" id="birthday" name="birthday"
+                        value="{{ request.user.date_of_birth }}">
+                    </div>
+                    <div class="col-md-6 align-self-end">
+                      <div class="text-end">
+
+                        <button class="secondary_btn update_profile">
+                          Apply
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+              <div class="zindex-high">
+                {% comment %}
+                <form class="row g-3 needs-validation" novalidate>
+                  <div class="card-info">
+                    <button class="apply_pay_btn">
+                      Apple Pay
+                    </button>
+                  </div>
+                </form>
+                <p class="text-divider"><span>Or pay with card</span></p>
+                {% endcomment %}
+                <br>
+
+                {% if request.user.stripe_id %}
+                <form action="{% url 'update_card' %}" method="POST" id="card_form">
+                  {% csrf_token %}
+                  <div class="mb-3 card-info">
+                    <label for="exampleFormControlInput1" class="form-label">Card information</label>
+                    <div class="visitig-crd" id="card_error">
+                      <input type="text" autocomplete="off" name="card_number" class="custom-form-control"
+                        id="card_number" placeholder="**** **** **** 1234" maxlength="16"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
+                        onKeyDown="if(this.value.length==16 && event.keyCode!=8) return false;">
+                      <img class="vissa-card" src="{% static 'img/images/cards.png' %}" alt="visiting card" />
+                    </div>
+
+                  </div>
+                  <div class="mb-3">
+                    <div class="month-cvv">
+                      <div id="month_error">
+                        <input type="text" class="custom-form-control mb-3 card-mm-yy" name="month" id="month"
+                          placeholder="MM " autocomplete="off" maxlength="2"
+                          oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
+                          onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;">
+                      </div>
+                      <div class="" id="year_error">
+                        <input type="text" autocomplete="off" class="custom-form-control mb-3 card-cvc" name="year"
+                          id="year" placeholder="YY" maxlength="2"
+                          oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
+                          onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;">
+                      </div>
+                      <div id="cvv_error">
+                        <input type="text" autocomplete="off" class="custom-form-control mb-3 card-cvc" name="cvc"
+                          id="cvc" placeholder="cvc" maxlength="4"
+                          oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
+                          onKeyDown="if(this.value.length==4 && event.keyCode!=8) return false;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3 " id="name_error">
+                    <label for="exampleFormControlInput1" class="form-label">Name on card</label>
+                    <input type="text" class="custom-form-control" name="name" id="name" placeholder=""
+                      autocomplete="off">
+                  </div>
+                  <div class="mb-3">
+                    <button type="submit" class="secondary_btn mt-3 w-100 submit_button">Save</button>
+                  </div>
+                  {% for message in messages %}
+                  {%if "card_error" in message.tags %}
+                  <div class="alert alert-danger" id="django_message">
+                    {{message}}
+                  </div>
+                  {% endif %}
+                  {%if "card_updated" in message.tags %}
+                  <div class="alert alert-success" id="django_message">
+                    {{message}}
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </form>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h5 class="text-grey mb-5">Subcriptions</h5>
+      <div class="row">
+        {% for plan in plans %}
+        <div class="col-md-4 mx-auto mt-5">
+          <div class="subscription_card">
+            {% if current_plan == None %}
+            {% if plan.price|slugify == Free_Plan_PRICE %}
+            <p class="current_plan">Current Plan</p>
+            {% endif %}
+            {% elif current_plan.plan.plan_name == plan.plan_name %}
+            <p class="current_plan">Current Plan</p>
+            {% endif %}
+
+            <div class="checkout_div bb-dashed-grey">
+              <h3 class="checkout_head">{{plan.plan_name}}</h3>
+              <p class="text-uppercase text_common text-grey"><b>Investment</b> Sessions / month</p>
+            </div>
+            <div class="price_checkout_sec bb-dashed-grey pt-3">
+              <p class="price_check login_text text-start align-items-center text-grey mb-2"><span
+                  class="price_plan me-2">${{plan.price}}</span><span>per<br />month</span></p>
+              <p class="login_text text-grey text-start mb-4">Make progress on your goals. With this plan, you get 4
+                coaching sessions per month with a certified coach, access to a library of curated learning content,
+                and professional planning resources.</p>
+
+              {% if current_plan.plan.plan_name == plan.plan_name %}
+                {% if current_plan.plan.price|slugify != Free_Plan_PRICE %}
+                  <div class="recurring_plan d-flex login_text text-grey text-start mb-4">
+                    <div class="d-flex">
+                      <div class="switch_box box_4 me-2">
+                        <div class="input_wrapper">
+                          <input type="checkbox" class="switch_4 cursor_p"
+                            data-stripe_price_id="{{plan.stripe_price_id}}" 
+                            {% if current_plan.status == "active" %} checked {% endif %} id="toggle_switch">
+                          <span class="is_checked">ON</span>
+                          <span class="is_unchecked">OFF</span>
+                        </div>
+                        <!-- <label for="toggle_switch" class="check_label cursor_p">Auto-renew</label> -->
+                      </div>  
+                    </div>
+                    <label for="toggle_switch" class="cursor_p">Monthly recurring subscription (cancel any time)</label>
+                  </div>
+              
+              <!-- <label class="switch">
+                <input type="checkbox" data-stripe_price_id="{{plan.stripe_price_id}}" 
+                {% if current_plan.status == "active" %} checked {% endif %} id="toggle_switch">
+                <span class="slider round"></span>
+              </label> -->
+                {% endif %}
+              {% endif %}
+            </div>
+            <div class="total_price_sec">
+              <div class="d-flex justify-content-between py-3">
+                <p class="login_text text-grey text-start mb-0">Anahit Ivestment Premium<br />Billed Monthly</p>
+                <p class="login_text text-grey text-start mb-0">${{plan.price}}</p>
+              </div>
+            </div>
+            <div class="text-end">
+              {% if current_plan == None %}
+              {% if plan.price|slugify == Free_Plan_PRICE %}
+              <div class="w-100 text-end">
+                  <a href="{% url 'user_preference' %}" class="secondary_btn">MANAGE</a>
+              </div>
+              {% else %}
+              <div class="w-100 text-end">
+                <a
+                  href="{% if user.is_authenticated %}{% url 'stripe_checkout' product_id=plan.id %}{% else %}{% url 'login' %} {% endif %}">
+                  <button class="secondary_btn">
+                    Buy Now
+                  </button>
+                </a>
+              </div>
+              {% endif %}
+              {% else %}
+              {% if current_plan.plan.plan_name == plan.plan_name %}
+              
+                <button class="secondary_btn" type="button"><a href="{% url 'user_preference' %}"> Manage Preferences</a></button>
+                {% elif plan.price|slugify == Free_Plan_PRICE %}
+                <div class="w-100 text-end">
+                  <a href="{% url 'cancel-subscription' sub_id=current_plan.stripe_sub price_id=plan.stripe_price_id %}">
+                    <button class="secondary_btn" type="button">SWITCH</button>
+                  </a>
+                </div>
+              {% else %}
+                <div class="w-100 text-end">
+                  <a href="{% url 'update-subscription' sub_id=current_plan.stripe_sub price_id=plan.stripe_price_id %}">
+                    <button class="secondary_btn" type="button">SWITCH</button>
+                  </a>
+                </div>
+              {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- <div class="col-md-4 mx-auto mt-5">
+                  <div class="subscription_card">
+                    <p class="current_plan">Current Plan</p>
+                    <div class="checkout_div bb-dashed-grey">
+                      <h3 class="checkout_head">Investment</h3>
+                      <p class="text-uppercase text_common text-grey"><b>Investment</b> Sessions / month</p>
+                    </div>
+                    <div class="price_checkout_sec bb-dashed-grey pt-3">
+                      <p class="price_check login_text text-start align-items-center text-grey mb-2"><span class="price_plan me-2">$749</span><span>per<br/>month</span></p>
+                      <p class="login_text text-grey text-start mb-4">Make progress on your goals. With this plan, you get 4 coaching sessions per month with a certified coach, access to a library of curated learning content, and professional planning resources.</p>
+                      <p class="recurring_plan login_text text-grey text-start mb-4"><img src="{% static 'img/images/renew.png' %}" class="me-3">Monthly recurring subscription (cancel any time)</p>
+                    </div>
+                    <div class="total_price_sec">
+                      <div class="d-flex justify-content-between py-3">
+                        <p class="login_text text-grey text-start mb-0">Anahit Ivestment Premium<br/>Billed Monthly</p>
+                        <p class="login_text text-grey text-start mb-0">$749</p>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="switch_box box_4">
+                          <div class="input_wrapper">
+                            <input type="checkbox" class="switch_4">
+                            <span class="is_checked">ON</span>
+                            <span class="is_unchecked">OFF</span>
+                          </div>
+                        </div>
+                      <button class="secondary_btn">
+                          MANAGE
+                      </button>
+                    </div>
+                  </div>
+                </div> -->
+        <!-- <div class="col-md-4 mx-auto mt-5">
+                  <div class="subscription_card">
+                    <div class="checkout_div bb-dashed-grey">
+                      <h3 class="checkout_head">Enterprise</h3>
+                      <p class="text-uppercase text_common text-grey"><b>Investment</b> Sessions / month</p>
+                    </div>
+                    <div class="price_checkout_sec bb-dashed-grey pt-3">
+                      <p class="price_check login_text text-start align-items-center text-grey mb-2"><span class="price_plan me-2">$1200</span><span>per<br/>month</span></p>
+                      <p class="login_text text-grey text-start mb-4">Make progress on your goals. With this plan, you get 4 coaching sessions per month with a certified coach, access to a library of curated learning content, and professional planning resources.</p>
+                      <p class="recurring_plan login_text text-grey text-start mb-4"><img src="{% static 'img/images/renew.png' %}" class="me-3">Monthly recurring subscription (cancel any time)</p>
+                    </div>
+                    <div class="total_price_sec">
+                      <div class="d-flex justify-content-between py-3">
+                        <p class="login_text text-grey text-start mb-0">Anahit Ivestment Premium<br/>Billed Monthly</p>
+                        <p class="login_text text-grey text-start mb-0">$1200</p>
+                      </div>
+                    </div>
+                    <div class="text-end">
+                      <button class="secondary_btn">
+                          SWITCH
+                      </button>
+                    </div>
+                  </div>
+                </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'includes/footer.html' %}
+</div>
+<!-- End Footer -->
+
+{% endblock %}
+
+
+
+{% block script %}
+
+
+<script>
+  function myFunction(x) {
+
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  $('.custom-form-select').select2({
+    minimumResultsForSearch: -1
+  });
+  jQuery('#password_eye').on('click', function () {
+    var x = document.getElementById("password");
+    myFunction(x)
+  });
+  jQuery('#confirm_password_eye').on('click', function () {
+    var x = document.getElementById("confirm_password");
+    myFunction(x)
+  });
+
+  var validation = new window.JustValidate('#register_from');
+  validation
+    .addField('#id_first_name', [
+      {
+        rule: 'required',
+        errorMessage: 'First name is required',
+      }
+    ])
+    .addField('#id_last_name', [
+      {
+        rule: 'required',
+        errorMessage: 'Last name is required',
+      }
+    ])
+    .addField('#id_password1', [
+      {
+        rule: 'required',
+        errorMessage: 'Password is required',
+      },
+      {
+        rule: 'strongPassword',
+        errorMessage: 'Minimum eight characters, one uppercase letter, one lowercase letter, one number and one special character',
+      }
+    ])
+    .addField('#id_password2', [
+      {
+        rule: 'required',
+        errorMessage: 'Confirm password is required',
+      },
+      {
+        validator: (value, fields) => {
+          if (
+            fields['#id_password1'] &&
+            fields['#id_password1'].elem
+          ) {
+            const repeatPasswordValue = fields['#id_password1'].elem.value;
+
+            return value === repeatPasswordValue;
+          }
+
+          return true;
+        },
+        errorMessage: 'Passwords should be the same',
+      },
+    ])
+  validation.addField('#id_email', [
+    {
+      rule: 'required',
+      errorMessage: 'Email is required',
+    },
+    {
+      rule: 'email',
+      errorMessage: 'Email is invalid!',
+    },
+    {
+      validator: (value) => () => {
+        console.log(value)
+        return new Promise((resolve) => {
+          fetch('/auth/checkusername/?type=email&value=' + value)
+            .then(function (response) {
+              if (response.status == 200)
+                resolve(true)
+              else {
+                resolve(false)
+              }
+            })
+        });
+      },
+      errorMessage: 'Email is already taken',
+    },
+  ],
+    {
+      successMessage: 'Looks good!',
+    }
+  );
+  validation.addField('#id_username', [
+    {
+      rule: 'required',
+      errorMessage: 'Username is required',
+    },
+    {
+      validator: (value) => () => {
+        console.log(value)
+        return new Promise((resolve) => {
+          fetch('/auth/checkusername/?type=username&value=' + value)
+            .then(function (response) {
+              if (response.status == 200)
+                resolve(true)
+              else {
+                resolve(false)
+              }
+            })
+        });
+      },
+      errorMessage: 'Username is already taken',
+    },
+  ],
+    {
+      successMessage: 'Looks good!',
+    }
+  );
+
+  validation.onSuccess((event) => {
+    event?.preventDefault();
+    console.log(event)
+    event.target.submit();
+  });
+
+</script>
+
+<script>
+  var togglePassword = document.querySelectorAll(".passwordToggle");
+  var password = document.querySelector("#id_password1");
+
+  for (var i = 0; i < togglePassword.length; i++) {
+    togglePassword[i].addEventListener("click", function () {
+      // toggle the type attribute
+      var type = this.previousElementSibling.getAttribute("type") === "password" ? "text" : "password";
+      this.previousElementSibling.setAttribute("type", type);
+      // toggle the eye icon
+      this.firstElementChild.classList.toggle('fa-eye');
+      this.firstElementChild.classList.toggle('fa-eye-slash');
+    });
+  }
+
+
+
+  // password validation
+
+  $('.update_profile').on("click", function () {
+    var raw_password = $("#password").val();
+    var confirm_password = $("#confirm_password").val();
+    var number = $("#phone").val();
+
+    var regix = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    var validationError = false;
+    var paras = document.getElementsByClassName('errors');
+    while (paras[0])
+      paras[0].parentNode.removeChild(paras[0]);
+    if (raw_password || confirm_password) {
+      if (regix.test(raw_password) == false) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Your password must contain at least 1 number, 1 uppercase,1 lowercase, 1 special character and minimun length of 8 characters. ";
+        document.getElementById('password_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+    }
+    if (number) {
+      console.log(number, 'this is the phone number')
+      if (number.length < 10 || number.length > 10) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter valid 10 digit phone number";
+        document.getElementById('number_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+    }
+    return true;
+  });
+
+</script>
+<script>
+
+  $(document).ready(function () {
+    $('#card_form').on("submit", function () {
+
+      var card_number = $("#card_number").val();
+      var month = $("#month").val();
+      var year = $("#year").val();
+      var cvc = $("#cvc").val();
+      var name = $("#name").val();
+
+      var validationError = false;
+      var paras = document.getElementsByClassName('errors');
+      while (paras[0])
+        paras[0].parentNode.removeChild(paras[0]);
+      if (card_number == '' || card_number == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter card number";
+        document.getElementById('card_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (card_number.length != 16) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter a valid card number";
+        document.getElementById('card_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (month == '' || month == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter month";
+        document.getElementById('month_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+
+      if (month.length != 2) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter a valid month";
+        document.getElementById('month_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (year == '' || year == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter year";
+        document.getElementById('year_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (year.length != 2) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter a valid year";
+        document.getElementById('year_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+
+      if (cvc == '' || cvc == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter cvc";
+        document.getElementById('cvv_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+
+      if (cvc.length < 3 || cvc.length > 4) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter a valid cvc";
+        document.getElementById('cvv_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+      if (name == '' || name == null) {
+        var x = document.createElement("LABEL");
+        x.style.color = 'red';
+        x.className = 'errors';
+        x.innerHTML = "Please enter your name";
+        document.getElementById('name_error').appendChild(x);
+        validationError = true;
+        return false;
+      }
+    })
+    var message_timeout = document.getElementById("django_message");
+    setTimeout(function () {
+      message_timeout.style.display = "none";
+    }, 5000);
+
+
+
+
+    $("#toggle_switch").change(function () {
+      var stripe_price_id = $('#toggle_switch').data('stripe_price_id')
+      var current_plan = "{{current_plan.stripe_sub}}"
+      update_subscription = (url, sub_id ,price_id, subscription_status) => {
+        jQuery.ajax({
+          type: "Get",
+          url: url,
+          data: {
+            "sub_id": sub_id,
+            "price_id": price_id,
+            "subscription_status": subscription_status
+          },
+          success: function (data) {
+            console.log('subscription updated')
+
+          }
+        });
+      }
+      if ($(this).prop("checked") == true) {
+        console.log('true')
+        console.log('active')
+        url = "{% url 'update-subscription-status'%}",
+        update_subscription(url, current_plan ,stripe_price_id, 'active')
+      } 
+      else {
+        url = "{% url 'update-subscription-status'%}",
+        update_subscription(url, current_plan ,stripe_price_id, 'inactive')
+      }
+    });
+
+
+  });
+
+</script>
+
+{% endblock %}

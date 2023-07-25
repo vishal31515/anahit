@@ -1,0 +1,16 @@
+{% load static %}
+{% if filter_finsights %}
+{% for service in filter_finsights %}
+<tr>
+  <td>
+    <a href="{% if user.is_authenticated %}{% if service.plans.price|slugify == Free_Plan_PRICE %}{{service.link}}{% elif service.plans in user_current_plan %}{{service.link}}{% else %}#{% endif %}{% else %}{% url 'account_login' %}{% endif %}">
+    {{service.title}}</a>
+  </td>
+    <td>{% for tag in service.tags.all %}{{tag.name}} {% endfor %}</td>
+  <!-- <td>Category</td> -->
+</tr>
+{% endfor %}
+
+{% else %}
+<h1>no data found</h1>
+{% endif %} 

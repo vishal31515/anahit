@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+
+
+{% block content %}
+<div class="main_wrapper">
+    <div class="right_bar d-flex justify-content-center py-4">
+        <a id="previous_page" href="{% url 'account_login' %}" class="">
+            <!-- <img  src="{% static 'img/images/plus.png' %}" alt=""> -->
+            <svg width="23" height="7" viewBox="0 0 23 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="2" y1="3.5" x2="23" y2="3.5" stroke="url(#paint0_linear_420_1324)"/>
+                <path d="M4.5 0.5L1.5 3.5L4.5 6.5" stroke="url(#paint1_linear_420_1324)" stroke-linecap="round"/>
+                <defs>
+                <linearGradient id="paint0_linear_420_1324" x1="-0.638744" y1="4.5" x2="-0.37173" y2="1.9438" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FCB854"/>
+                <stop offset="0.479066" stop-color="#D96534"/>
+                <stop offset="0.817115" stop-color="#DC4E4F"/>
+                <stop offset="1" stop-color="#DD425D"/>
+                </linearGradient>
+                <linearGradient id="paint1_linear_420_1324" x1="1.12304" y1="3.5" x2="4.48253" y2="2.73425" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FCB854"/>
+                <stop offset="0.479066" stop-color="#D96534"/>
+                <stop offset="0.817115" stop-color="#DC4E4F"/>
+                <stop offset="1" stop-color="#DD425D"/>
+                </linearGradient>
+                </defs>
+                </svg>             
+        </a>
+      </div>
+    <div class="">
+        <div class="pt-3 px-md-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center justify-content-center">
+
+                            <div class=" mx-auto">
+                                <a href="{% url 'home' %}" class="">
+
+                                    <img style="max-height: 55px;" class='img' src="{% static 'img/images/Anahit-logo.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="login_page_wrapper py-3 ">
+            <div class="container">
+                <div class="text-center magic_wrapper">  
+                    {% if user.is_authenticated %}
+                    {% include "account/snippets/already_logged_in.html" %}
+                    <a href="/">go back</a>
+                    {% else %}
+                    <h1 class="primary_head mb-3">{% trans "Enter mail to receive a one-time login link" %}</h1>
+                        <form action="{% url 'magiclink:login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post">
+                            {% csrf_token %}
+                            {{ login_form }}
+                            <button type='submit'>Send login link</button>
+                        </form>
+                        {% endif %}
+                    <p class="text_common text-grey mb-10">{% blocktrans %}Please check your email and use the link to login into Anahit. All buttons are at same level.{% endblocktrans %}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
